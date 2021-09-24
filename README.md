@@ -1,10 +1,6 @@
 # DBAC
 
-DBAC stands for Directory-Based Access Control. It combines distributed IoT directories and attribute-based access control.
-
-## History
-
-This directory application used to be named as "Droit". Therefore, the term "Droit" may appear in the source codes to refer to a directory.  
+DBAC stands for Directory-Based Access Control. It combines distributed IoT directories and attribute-based access control. This directory application used to be named as "Droit". Therefore, the term "Droit" may appear in the source codes to refer to a directory.  
 
 ## To bootstrap the project
 
@@ -26,7 +22,7 @@ To disable InsecureTransportError of OAuth2 (as https is required, but run with 
 
 ## A sample walk-through 
 
-Below we show a sample walk-through with a binary tree-like structure. By default (only for demo), directories are geographically distributed and connected with each other as this topology. 
+Below we show a sample walk-through with a binary tree-like structure. By default (only for demo), directories are geographically distributed and connected with each other as this topology. The name convention uses letter 'a' or 'b' to denote the left and right children in a tree. For example, level4aab is connected to its parent directory level3aa and its children directories level5aaba and level5aabb.
 
 ```
 level1 (master)
