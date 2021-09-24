@@ -1,0 +1,16 @@
+/* CSS file for dashboard/query page */
+
+/* By default the result list is invisible */
+.result {
+    display: none;
+}
+
+/* Prevent horizontal scroll bar in the thing description modal */
+#thing_description_modal {
+    overflow-wrap: break-word;
+}
+
+#thing_description_modal .modal-dialog {
+    max-width: none;
+    width: 600px;
+}

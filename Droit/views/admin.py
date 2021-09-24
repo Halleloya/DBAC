@@ -1,0 +1,3 @@
+"""
+Droit administration module
+"""

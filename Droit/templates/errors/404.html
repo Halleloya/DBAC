@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="container">
+    <h1>404 Page Not Found</h1>
+    <h4>Reason: </h4>
+    <p>
+        {{ description }}
+    </p>
+    <div class="row mt-5 clearfix">
+        <div class="float-left mr-3">
+            <a href="{{url_for('home.index')}}" class="btn btn-primary">Back To Home</a>
+        </div>
+        <div class="float-left">
+            <a href="{{url_for('auth.login')}}" class="btn btn-primary">Back To Login</a>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock body %}

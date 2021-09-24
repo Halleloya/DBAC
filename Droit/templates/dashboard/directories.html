@@ -1,0 +1,30 @@
+{% extends "dashboard/dashboard.html" %}
+
+{% block dashboard_content %}
+<h2 class="mb-5">Directories</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Relationship</th>
+            <th scope="col">Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for directory in directories %}
+        <tr>
+            <td>{{ directory.directory_name }}</td>
+            <td>{{ directory.relationship }}</td>
+            <td>
+                <a class="btn btn-primary" href="{{  directory.url }}{{url_for('dashboard.home')}}">Go</a>
+
+            </td>
+            <td>
+
+            </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+{% endblock dashboard_content%}

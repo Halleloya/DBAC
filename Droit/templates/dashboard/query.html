@@ -1,0 +1,96 @@
+{% extends "dashboard/dashboard.html" %}
+
+{% block link %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static', filename='css/query.css')}}">
+{% endblock link %}
+
+{% block dashboard_content %}
+
+<h2 class="mb-5">Query</h2>
+
+<form class="register-form" method="POST" action="{{url_for('api.register')}}">
+    <div class="form-row align-items-center">
+        <div class="col-sm-3">
+            <!-- {{ form.location.label }} -->
+            {{ form.location(class = 'form-control', id='location', value = config['HOST_NAME'], placeholder = 'Location') }}
+        </div>
+        <div class="col-sm-3">
+            <!-- {{ form.thing_id.label }} -->
+            {{ form.thing_id(class = 'form-control', id='thing_id', placeholder = 'Thing ID') }}
+        </div>
+        <div class="col-sm-3">
+            <!-- {{ form.thing_type.label }} -->
+            {{ form.thing_type(class = 'form-control', id='thing_type', placeholder = 'Thing Type') }}
+        </div>
+        <div class="col-sm-auto">
+            <button id="search" type="button" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+<!-- Query result list -->
+<div class="result">
+    <h2 class="mt-5 mb-5">Query Result</h2>
+    <table class="thing-list table">
+        <thead>
+            <th>Thing ID</th>
+            <th>Type</th>
+            <th>Title</th>
+            <th>Attributes</th>
+            <th>Show Detail</th>
+            <th>JWT</th>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal for thing description detail -->
+<div class="modal fade" id="thing_description_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="thing_description_modal_title">Thing Description Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <pre id="json-thingdescription"></pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for jwt description detail -->
+<div class="modal fade" id="jwt_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jwt_modal_title">JWT Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <pre id="json-jwt"></pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock dashboard_content %}
+
+
+{% block script %}
+{{ super() }}
+<script src="{{url_for('static', filename='js/query.js')}}"></script>
+{% endblock script%}

@@ -1,0 +1,52 @@
+{
+	"description": "Do not allow access for more than 5 times within 2 mins",
+	"effect": "allow",
+	"rules": {
+		"subject": [
+			{
+				"id": {
+					"condition": "RegexMatch",
+					"value": ".*"
+				}
+			}
+		],
+		"resource": {
+			"id": {
+				"condition": "RegexMatch",
+				"value": ".*"
+			}
+		},
+		"action": [
+			{
+				"$.method": {
+					"condition": "Equals",
+					"value": "create"
+				}
+			},
+			{
+				"$.method": {
+					"condition": "Equals",
+					"value": "delete"
+				}
+			},
+			{
+				"$.method": {
+					"condition": "Equals",
+					"value": "get"
+				}
+			}
+		],
+		"context": {
+			"$.accessfrequency": {
+				"condition": "AccessFrequencyLte",
+				"values": [
+					5,
+					2
+				]
+			}
+		}
+	},
+	"targets": {},
+	"priority": 1
+}
+

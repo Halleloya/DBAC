@@ -1,0 +1,34 @@
+{% extends "dashboard/dashboard.html" %}
+
+{% block dashboard_content %}
+<h2 class="mb-5">Relocate Thing</h2>
+
+<form class="register-form" method="POST" action="{{url_for('api.register')}}">
+    <div>
+        <div class="form-group">
+            {{ form.from_location.label }}
+            {{ form.from_location(class = 'form-control', id='from_location', value=config['HOST_NAME']) }}
+        </div>
+        <div class="form-group">
+            {{ form.to_location.label }}
+            {{ form.to_location(class = 'form-control', id='to_location') }}
+        </div>
+        <div class="form-group">
+            {{ form.thing_id.label }}
+            {{ form.thing_id(class = 'form-control', id='thing_id') }}
+        </div>
+        <div class="form-group">
+            <button id="relocate-btn" type="button" class="btn btn-warning">
+                Relocate
+            </button>
+        </div>
+    </div>
+</form>
+
+{% endblock dashboard_content %}
+
+
+{% block script %}
+{{ super() }}
+<script src="{{url_for('static', filename='js/relocate.js')}}"></script>
+{% endblock script%}

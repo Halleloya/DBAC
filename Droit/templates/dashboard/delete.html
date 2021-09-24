@@ -1,0 +1,34 @@
+{% extends "dashboard/dashboard.html" %}
+
+
+{% block dashboard_content %}
+<h2 class="mb-5">Delete Thing</h2>
+
+<form class="delete-form" method="POST" action="{{url_for('api.register')}}">
+    <div>
+        <div class="form-group">
+            {{ form.location.label }}
+            {{ form.location(class = 'form-control', id='location', value=config['HOST_NAME']) }}
+        </div>
+        <div class="form-group">
+            {{ form.thing_id.label }}
+            {{ form.thing_id(class = 'form-control', id='thing_id') }}
+        </div>
+
+
+        <div class="form-group">
+            <button class="btn btn-danger" type="button" id="delete-btn">
+                Delete
+            </button>
+
+        </div>
+    </div>
+</form>
+
+{% endblock dashboard_content %}
+
+
+{% block script %}
+{{ super() }}
+<script src="{{url_for('static', filename='js/delete.js')}}"></script>
+{% endblock script%}

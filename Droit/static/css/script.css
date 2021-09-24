@@ -1,0 +1,20 @@
+#json-query-script {
+    height: 400px;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+/* By default the result list is invisible */
+.result {
+    display: none;
+}
+
+.form-check{
+    padding-bottom: 16px;
+}
+
+/* Prevent horizontal scroll bar in the thing description modal */
+#thing_description_modal {
+    overflow-wrap: break-word;
+}

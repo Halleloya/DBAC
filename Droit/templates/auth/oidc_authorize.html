@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block link %}
+
+{% endblock link %}
+
+{% block body %}
+<div class="container">
+    <h3>Relying Party <span class="text-primary">{{grant.client.client_name}}</span>  is requesting user <span class="text-primary">{{ current_user.username }}</span> 's authorization:</h3>
+    <br>
+    <form action="" method="POST">
+        {% for scope in client_scope.split() %}
+            {% if scope == "profile" or scope == "openid" %}
+                <h5>{{scope}}</h5>
+            {% else %}
+                <h5><input type="checkbox" value="{{scope}}" name="checks">&nbsp;{{scope}}</h5><br>
+            {% endif %}
+        {% endfor %}
+        <br>
+        <button type="submit" class="btn btn-primary" name="confirm">Confirm</button>
+        <button type="submit" class="btn btn-primary" name="cancel">Cancel</button>
+    </form>
+        
+</div>
+
+{% endblock body %}

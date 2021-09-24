@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block link %}
+
+{% endblock link %}
+
+{% block body %}
+<div class="container">
+    <form method="POST">
+        <div class="form-group">
+            {{form.email.label}}
+            {{form.email(class='form-control')}}
+        {% if form.email.errors %}
+        <ul class="errors">
+            {% for error in form.email.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        </div>
+        <div class="form-group">
+            {{form.password.label}}
+            {{form.password(class='form-control')}}
+        {% if form.password.errors %}
+        <ul class="errors">
+            {% for error in form.password.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        </div>
+        <div class="form-group form-check">  
+            {{ form.remember_me(class = 'form-check-input') }}
+            {{ form.remember_me.label(class = 'form-check-label') }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a type="button" class="btn btn-secondary oidc-login float-right" href="{{ url_for('auth.oidc_login')}}">Sign In With Other Account</a>
+
+      </form>
+</div>
+
+{% endblock body %}

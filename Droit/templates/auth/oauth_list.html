@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block link %}
+
+{% endblock link %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Known OIDC Providers</h2>
+            <div class="list-group">
+                {% for provider in oauth_providers %}
+                <li class="list-group-item">
+                    <h5 class="text-capitalize text-primary">{{provider.name}}</h5>
+                    <p>
+                        <b>Access Token URL:</b> {{provider.access_token_url }} 
+                    </p>
+                    <p>
+                        <b>Authorize URL:</b> {{provider.authorize_url }}
+                    </p>
+                    <p>
+                        <b>My Client ID:</b> {{provider.client_id }}
+                    </p>
+                    <p>
+                        <b>My Client Secret:</b> {{provider.client_secret }}
+                    </p>
+                </li>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col">
+            <h2>Known OIDC Clients</h2>
+            <a type="button" class="btn btn-primary mb-2" href="{{ url_for('auth.oidc_create_client') }}">Register New Client</a>
+            <div class="list-group">
+                {% for client in oauth_clients %}
+                <li class="list-group-item">
+                    <h5 class="text-capitalize text-primary">{{client.client_name}}</h5>
+                    <p>
+                        <b>Client ID:</b> {{ client.client_id}}
+                    </p>
+                    <p>
+                        <b>Client Secret:</b> {{ client.client_secret}}
+                    </p>
+                    <p>
+                        <b>Issued At:</b> {{ client.client_id_issued_at}}
+                    </p>
+                    <p>
+                        <b>Secret Expires At:</b> {{ client.client_secret_expires_at}}
+                    </p>
+                    <p>
+                        <b>Client URI:</b> {{ client.client_uri}}
+                    </p>
+                    <p>
+                        <b>Client Redirect URIs:</b> {{ client.redirect_uris}}
+                    </p>
+                    <p>
+                        <b>Scope:</b> {{ client.scope}}
+                    </p>
+                    <p>
+                        <b>Grant Types:</b> {{ client.grant_types}}
+                    </p>
+                    <p>
+                        <b>Response Type:</b> {{ client.response_types }}
+                    </p>
+                    <p>
+                        <b>Token Endpoint Auth Method:</b> {{ client.token_endpoint_auth_method }}
+                    </p>
+                </li>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock body %}

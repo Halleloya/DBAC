@@ -1,0 +1,12 @@
+.contact {
+    margin-top: 20px;
+}
+.contact .icon {
+    margin-right: 5px;
+}
+.contact .photo {
+    float: left;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 30px;
+}

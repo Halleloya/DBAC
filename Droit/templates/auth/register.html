@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block link %}
+
+{% endblock link %}
+
+{% block body %}
+<div class="container">
+    <form method="POST">
+        <div class="form-group">
+            {{form.username.label}}
+            {{form.username(class = 'form-control')}}
+            {% if form.username.errors %}
+            <ul class="errors">
+                {% for error in form.username.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{form.email.label}}
+            {{form.email(class='form-control')}}
+            {% if form.email.errors %}
+            <ul class="errors">
+                {% for error in form.email.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{form.address.label}}
+            {{form.address(class = 'form-control')}}
+            {% if form.address.errors %}
+            <ul class="errors">
+                {% for error in form.address.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{form.phone_number.label}}
+            {{form.phone_number(class = 'form-control')}}
+            {% if form.phone_number.errors %}
+            <ul class="errors">
+                {% for error in form.phone_number.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{form.password.label}}
+            {{form.password(class='form-control')}}
+            {% if form.password.errors %}
+            <ul class="errors">
+                {% for error in form.password.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{form.retype_password.label}}
+            {{form.retype_password(class='form-control')}}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+</div>
+
+{% endblock body %}

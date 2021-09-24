@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block link %}
+
+{% endblock link %}
+
+{% block body %}
+<div class="container">
+    <h3>Currently requesting user authorization for the following information:</h3>
+    <br>
+    <form action="" method="POST" id="authorizeForm">
+    <ul class="m-5">
+        {% for scope in client_scope.split() %}
+            {% if scope == "profile" or scope == "openid" %}
+                <h5>{{scope}}</h5>
+            {% else %}
+                <h5><input type="checkbox" value="{{scope}}" name="checks" checked>&nbsp;{{scope}}</h5><br>
+            {% endif %}
+        {% endfor %}
+    </ul>
+        <br>
+        <button type="button"  onclick="onConfirm();" class="btn btn-primary" name="confirm">Confirm</button>
+        <button type="button" onclick="onCancel();" class="btn btn-primary" name="cancel">Cancel</button>
+    </form>
+        
+</div>
+
+{% endblock body %}
+
+{% block script %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/oauth_authorize.js') }}"></script>
+{% endblock script%}
