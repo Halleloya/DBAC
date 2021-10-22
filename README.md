@@ -5,9 +5,16 @@ DBAC stands for Directory-Based Access Control. It combines distributed IoT dire
 ## To bootstrap the project
 
 1. `git clone https://github.com/Halleloya/DABAC.git`.
-2. Install dependencies `pip install -r requirements.txt`. (Note: you might want to have a virtual environment, in case any potential package conflict)
-3. Configure the database, e.g., store your database in data/db (create a folder for it if it doesn't exist), and `mongod --dbpath data/db`. 
-4. Run the shell `python runall.py` or `./run.sh` to run all levels of the directory. It create a simple tree-like topology for the geographically distributed directories. 
+2. Create a virtual environment by running the following:
+''' sh
+python3 -m venv env
+source env/bin/activate
+pip3 install -r requirements.txt
+'''
+3.Install dependencies `pip install -r requirements.txt`. (Note: you might want to have a virtual environment, in case any potential package conflict)
+5. Configure the database, e.g., store your database in data/db (create a folder for it if it doesn't exist), and `mongod --dbpath data/db`. 
+6. Open another terminal and go to the same virtual environment.
+7. Run the shell `python runall.py` or `./run.sh` to run all levels of the directory. It create a simple tree-like topology for the geographically distributed directories. 
 
 Sidenotes:
 
