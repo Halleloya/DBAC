@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubtest
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu
