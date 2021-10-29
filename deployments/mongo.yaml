@@ -11,7 +11,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/tmp/dbdata"
+    path: "/tmp/dbdata1"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -44,23 +44,15 @@ spec:
         app: mongo
     spec:
       volumes:
-    	- name: mongo-pv-storage
-      	persistentVolumeClaim:
-        	claimName: mongo-pv-claim
+        - name: mongo-pv-storage
+          persistentVolumeClaim:
+            claimName: mongo-pv-claim
       containers:
         - name: mongodb
           image: mongo
-          command: [--auth]
           volumeMounts:
-            - mountPath: "/data/db"
+          - mountPath: "/data/db"
             name: mongo-pv-storage
-            - mountPath: "/docker-entrypoint-initdb.d/mongo-init.sh"
-            name: user_script
-          volumes:
-            - name: user_script
-            hostPath:
-              path: user_init.sh
-              type: Directory
           ports:
           - containerPort: 27017
           env:
@@ -74,8 +66,6 @@ spec:
               secretKeyRef:
                 name: mongodb-secret
                 key: mongo-root-password
-          - name: MONGO_INITDB_DATABASE
-          value: admin
 ---
 apiVersion: v1
 kind: Service
