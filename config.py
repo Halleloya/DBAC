@@ -35,7 +35,7 @@ class DevConfig(BaseConfig):
     # Development Environment Configuration
     ENV_NAME = "Development"
     # Mongo Engine
-    MONGODB_HOST = 'localhost'
+    MONGODB_HOST = os.getenv('MONGODB_HOST', 'localhost')
     MONGODB_PORT = 27017
     BOUNDING_BOX_COORDS = []
 
@@ -70,7 +70,7 @@ class Level1DevConfig(DevConfig):
     MONGODB_PORT = 27017
     MONGODB_DB = 'level1'
     # pymongo
-    MONGO_URI = "mongodb://localhost:27017/level1"
+    MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level1"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
     OAUTH2_JWT_ISS = 'http://localhost:5001/'
@@ -107,7 +107,7 @@ class Level2aDevConfig(DevConfig):
     MONGODB_PORT = 27017
     MONGODB_DB = 'level2a'
     MONGO_DBNAME = 'level2a'
-    MONGO_URI = "mongodb://localhost:27017/level2a"
+    MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level2a"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
     OAUTH2_JWT_ISS = 'http://localhost:5002/'
@@ -145,7 +145,7 @@ class Level2bDevConfig(DevConfig):
     MONGODB_PORT = 27017
     MONGODB_DB = 'level2b'
     MONGO_DBNAME = 'level2b'
-    MONGO_URI = "mongodb://localhost:27017/level2b"
+    MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level2b"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
     OAUTH2_JWT_ISS = 'http://localhost:5003/'
@@ -182,7 +182,7 @@ class Level3aaDevConfig(DevConfig):
     MONGODB_PORT = 27017
     MONGODB_DB = 'level3aa'
     MONGO_DBNAME = 'level3aa'
-    MONGO_URI = "mongodb://localhost:27017/level3aa"
+    MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level3aa"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
     OAUTH2_JWT_ISS = 'http://localhost:5004/'
@@ -219,7 +219,7 @@ class Level3abDevConfig(DevConfig):
     MONGODB_PORT = 27017
     MONGODB_DB = 'level3ab'
     MONGO_DBNAME = 'level3ab'
-    MONGO_URI = "mongodb://localhost:27017/level3ab"
+    MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level3ab"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
     OAUTH2_JWT_ISS = 'http://localhost:5005/'
@@ -256,7 +256,7 @@ class Level4abaDevConfig(DevConfig):
     MONGODB_PORT = 27017
     MONGODB_DB = 'level4aba'
     MONGO_DBNAME = 'level4aba'
-    MONGO_URI = "mongodb://localhost:27017/level4aba"
+    MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level4aba"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
     OAUTH2_JWT_ISS = 'http://localhost:5006/'
@@ -297,7 +297,7 @@ class Level4abbDevConfig(DevConfig):
     MONGODB_PORT = 27017
     MONGODB_DB = 'level4abb'
     MONGO_DBNAME = 'level4abb'
-    MONGO_URI = "mongodb://localhost:27017/level4abb"
+    MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level4abb"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
     OAUTH2_JWT_ISS = 'http://localhost:5007/'
@@ -335,7 +335,7 @@ class Level5abbaDevConfig(DevConfig):
     MONGODB_PORT = 27017
     MONGODB_DB = 'level5abba'
     MONGO_DBNAME = 'level5abba'
-    MONGO_URI = "mongodb://localhost:27017/level5abba"
+    MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level5abba"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
     OAUTH2_JWT_ISS = 'http://localhost:5008/'
@@ -373,7 +373,7 @@ class Level5abbbDevConfig(DevConfig):
     MONGODB_PORT = 27017
     MONGODB_DB = 'level5abbb'
     MONGO_DBNAME = 'level5abbb'
-    MONGO_URI = "mongodb://localhost:27017/level5abbb"
+    MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level5abbb"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
     OAUTH2_JWT_ISS = 'http://localhost:5007/'

@@ -10,6 +10,9 @@ deploy: build deploy-mongo
 	eval $(minikube -p minikube docker-env) && \
 	kubectl apply -f deployments/droit.yaml
 
+undeploy:
+	kubectl delete -f deployments/mongo.yaml || true
+	kubectl delete -f deployments/droit.yaml || true
 # install:
 
 # minikube addons enable ingress

@@ -17,7 +17,9 @@ spec:
       containers:
         - name: droit
           image: droit-local:1.0.0
-          command: ["python3", "./run.py", "--level", "level1"]
+          ports:
+            - containerPort: 5001
+          command: ["python3", "./run.py", "--host", "0.0.0.0", "--level", "level1"]
           imagePullPolicy: Never
           env:
             - name: MONGODB_HOST
@@ -35,29 +37,432 @@ spec:
   selector:
     matchLabels:
       app: droit-master
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: droit-master-service
-# spec:
-#   selector:
-#     app: droit-master
-#   ports:
-#     - protocol: TCP
-#       port: 5001
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: droit-service
+  name: droit-master-service
 spec:
-  type: NodePort
   selector:
     app: droit-master
   ports:
-    - port: 5002
-      targetPort: 5002
-      # Optional field
-      # By default and for convenience, the Kubernetes control plane will allocate a port from a range (default: 30000-32767)
-      nodePort: 30007
+    - protocol: TCP
+      port: 5001
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: droit-level2a-deployment
+  labels:
+    app: droit-level2a
+    env: test
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: droit-level2a-pod
+      labels:
+        app: droit-level2a
+    spec:
+      containers:
+        - name: droit
+          image: droit-local:1.0.0
+          ports:
+            - containerPort: 5002
+          command: ["python3", "./run.py", "--host", "0.0.0.0", "--level", "level2a"]
+          imagePullPolicy: Never
+          env:
+            - name: MONGODB_HOST
+              value: mongodb-service
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom: 
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-password
+  selector:
+    matchLabels:
+      app: droit-level2a
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: droit-level2a-service
+spec:
+  selector:
+    app: droit-level2a
+  ports:
+    - protocol: TCP
+      port: 5002
+      
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: droit-level2b-deployment
+  labels:
+    app: droit-level2b
+    env: test
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: droit-level2b-pod
+      labels:
+        app: droit-level2b
+    spec:
+      containers:
+        - name: droit
+          image: droit-local:1.0.0
+          ports:
+            - containerPort: 5003
+          command: ["python3", "./run.py", "--host", "0.0.0.0", "--level", "level2b"]
+          imagePullPolicy: Never
+          env:
+            - name: MONGODB_HOST
+              value: mongodb-service
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom: 
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-password
+  selector:
+    matchLabels:
+      app: droit-level2b
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: droit-level2b-service
+spec:
+  selector:
+    app: droit-level2b
+  ports:
+    - protocol: TCP
+      port: 5003
+       
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: droit-level3aa-deployment
+  labels:
+    app: droit-level3aa
+    env: test
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: droit-level3aa-pod
+      labels:
+        app: droit-level3aa
+    spec:
+      containers:
+        - name: droit
+          image: droit-local:1.0.0
+          ports:
+            - containerPort: 5004
+          command: ["python3", "./run.py", "--host", "0.0.0.0", "--level", "level3aa"]
+          imagePullPolicy: Never
+          env:
+            - name: MONGODB_HOST
+              value: mongodb-service
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom: 
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-password
+  selector:
+    matchLabels:
+      app: droit-level3aa
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: droit-level3aa-service
+spec:
+  selector:
+    app: droit-level3aa
+  ports:
+    - protocol: TCP
+      port: 5004      
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: droit-level3ab-deployment
+  labels:
+    app: droit-level3ab
+    env: test
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: droit-level3ab-pod
+      labels:
+        app: droit-level3ab
+    spec:
+      containers:
+        - name: droit
+          image: droit-local:1.0.0
+          ports:
+            - containerPort: 5005
+          command: ["python3", "./run.py", "--host", "0.0.0.0", "--level", "level3ab"]
+          imagePullPolicy: Never
+          env:
+            - name: MONGODB_HOST
+              value: mongodb-service
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom: 
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-password
+  selector:
+    matchLabels:
+      app: droit-level3ab
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: droit-level3ab-service
+spec:
+  selector:
+    app: droit-level3ab
+  ports:
+    - protocol: TCP
+      port: 5005   
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: droit-level4aba-deployment
+  labels:
+    app: droit-level4aba
+    env: test
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: droit-level4aba-pod
+      labels:
+        app: droit-level4aba
+    spec:
+      containers:
+        - name: droit
+          image: droit-local:1.0.0
+          ports:
+            - containerPort: 5006
+          command: ["python3", "./run.py", "--host", "0.0.0.0", "--level", "level4aba"]
+          imagePullPolicy: Never
+          env:
+            - name: MONGODB_HOST
+              value: mongodb-service
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom: 
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-password
+  selector:
+    matchLabels:
+      app: droit-level4aba
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: droit-level4aba-service
+spec:
+  selector:
+    app: droit-level4aba
+  ports:
+    - protocol: TCP
+      port: 5006      
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: droit-level4abb-deployment
+  labels:
+    app: droit-level4abb
+    env: test
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: droit-level4abb-pod
+      labels:
+        app: droit-level4abb
+    spec:
+      containers:
+        - name: droit
+          image: droit-local:1.0.0
+          ports:
+            - containerPort: 5007
+          command: ["python3", "./run.py", "--host", "0.0.0.0", "--level", "level4abb"]
+          imagePullPolicy: Never
+          env:
+            - name: MONGODB_HOST
+              value: mongodb-service
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom: 
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-password
+  selector:
+    matchLabels:
+      app: droit-level4abb
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: droit-level4abb-service
+spec:
+  selector:
+    app: droit-level4abb
+  ports:
+    - protocol: TCP
+      port: 5007      
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: droit-level5abba-deployment
+  labels:
+    app: droit-level5abba
+    env: test
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: droit-level5abba-pod
+      labels:
+        app: droit-level5abba
+    spec:
+      containers:
+        - name: droit
+          image: droit-local:1.0.0
+          ports:
+            - containerPort: 5008
+          command: ["python3", "./run.py", "--host", "0.0.0.0", "--level", "level5abba"]
+          imagePullPolicy: Never
+          env:
+            - name: MONGODB_HOST
+              value: mongodb-service
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom: 
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-password
+  selector:
+    matchLabels:
+      app: droit-level5abba
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: droit-level5abba-service
+spec:
+  selector:
+    app: droit-level5abba
+  ports:
+    - protocol: TCP
+      port: 5008      
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: droit-level5abbb-deployment
+  labels:
+    app: droit-level5abbb
+    env: test
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: droit-level5abbb-pod
+      labels:
+        app: droit-level5abbb
+    spec:
+      containers:
+        - name: droit
+          image: droit-local:1.0.0
+          ports:
+            - containerPort: 5009
+          command: ["python3", "./run.py", "--host", "0.0.0.0", "--level", "level5abbb"]
+          imagePullPolicy: Never
+          env:
+            - name: MONGODB_HOST
+              value: mongodb-service
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom: 
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-password
+  selector:
+    matchLabels:
+      app: droit-level5abbb
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: droit-level5abbb-service
+spec:
+  selector:
+    app: droit-level5abbb
+  ports:
+    - protocol: TCP
+      port: 5009      
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: droit-service
+# spec:
+#   type: NodePort
+#   selector:
+#     app: droit-master
+#   ports:
+#     - port: 5001
+#       targetPort: 5001
+#       # Optional field
+#       # By default and for convenience, the Kubernetes control plane will allocate a port from a range (default: 30000-32767)
+#       nodePort: 30007
