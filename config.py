@@ -38,6 +38,26 @@ class DevConfig(BaseConfig):
     MONGODB_HOST = os.getenv('MONGODB_HOST', 'localhost')
     MONGODB_PORT = 27017
     BOUNDING_BOX_COORDS = []
+    level1_host = 'http://localhost:5001/'
+    level2a_host = 'http://localhost:5002/'
+    level2b_host = 'http://localhost:5003/'
+    level3aa_host = 'http://localhost:5004/'
+    level3ab_host = 'http://localhost:5005/'
+    level4aba_host = 'http://localhost:5006/'
+    level4abb_host = 'http://localhost:5007/'
+    level5abba_host = 'http://localhost:5008/'
+    level5abbb_host = 'http://localhost:5009/'
+
+    if os.getenv('CDN_DOMAIN'):
+        level1_host = 'http://droit-master-service:5001/'
+        level2a_host = 'http://droit-level2a-service:5002/'
+        level2b_host = 'http://droit-level2b-service:5003/'
+        level3aa_host = 'http://droit-level3aa-service:5004/'
+        level3ab_host = 'http://droit-level3ab-service:5005/'
+        level4aba_host = 'http://droit-level4aba-service:5006/'
+        level4abb_host = 'http://droit-level4abb-service:5007/'
+        level5abba_host ='http://droit-level5abba-service:5008/'
+        level5abbb_host = 'http://droit-level5abbb-service:5009/'
 
 
 class Level1DevConfig(DevConfig):
@@ -73,7 +93,7 @@ class Level1DevConfig(DevConfig):
     MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level1"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
-    OAUTH2_JWT_ISS = 'http://localhost:5001/'
+    OAUTH2_JWT_ISS = DevConfig.level1_host
     OAUTH2_JWT_KEY = 'level1-secret'
     OAUTH2_JWT_ALG = 'HS256'
     OAUTH2_JWT_EXP = 3600
@@ -110,7 +130,7 @@ class Level2aDevConfig(DevConfig):
     MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level2a"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
-    OAUTH2_JWT_ISS = 'http://localhost:5002/'
+    OAUTH2_JWT_ISS = DevConfig.level2a_host
     OAUTH2_JWT_KEY = 'level2a-secret'
     OAUTH2_JWT_ALG = 'HS256'
     OAUTH2_JWT_EXP = 3600
@@ -148,7 +168,7 @@ class Level2bDevConfig(DevConfig):
     MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level2b"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
-    OAUTH2_JWT_ISS = 'http://localhost:5003/'
+    OAUTH2_JWT_ISS = DevConfig.level2b_host
     OAUTH2_JWT_KEY = 'level2b-secret'
     OAUTH2_JWT_ALG = 'HS256'
     OAUTH2_JWT_EXP = 3600
@@ -185,7 +205,7 @@ class Level3aaDevConfig(DevConfig):
     MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level3aa"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
-    OAUTH2_JWT_ISS = 'http://localhost:5004/'
+    OAUTH2_JWT_ISS = DevConfig.level3aa_host
     OAUTH2_JWT_KEY = 'level3aa-secret'
     OAUTH2_JWT_ALG = 'HS256'
     OAUTH2_JWT_EXP = 3600
@@ -222,7 +242,7 @@ class Level3abDevConfig(DevConfig):
     MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level3ab"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
-    OAUTH2_JWT_ISS = 'http://localhost:5005/'
+    OAUTH2_JWT_ISS = DevConfig.level3ab_host
     OAUTH2_JWT_KEY = 'level3ab-secret'
     OAUTH2_JWT_ALG = 'HS256'
     OAUTH2_JWT_EXP = 3600
@@ -259,7 +279,7 @@ class Level4abaDevConfig(DevConfig):
     MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level4aba"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
-    OAUTH2_JWT_ISS = 'http://localhost:5006/'
+    OAUTH2_JWT_ISS = DevConfig.level4aba_host
     OAUTH2_JWT_KEY = 'level4aba-secret'
     OAUTH2_JWT_ALG = 'HS256'
     OAUTH2_JWT_EXP = 3600
@@ -300,7 +320,7 @@ class Level4abbDevConfig(DevConfig):
     MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level4abb"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
-    OAUTH2_JWT_ISS = 'http://localhost:5007/'
+    OAUTH2_JWT_ISS = DevConfig.level4abb_host
     OAUTH2_JWT_KEY = 'level4abb-secret'
     OAUTH2_JWT_ALG = 'HS256'
     OAUTH2_JWT_EXP = 3600
@@ -338,7 +358,7 @@ class Level5abbaDevConfig(DevConfig):
     MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level5abba"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
-    OAUTH2_JWT_ISS = 'http://localhost:5008/'
+    OAUTH2_JWT_ISS = DevConfig.level5abba_host
     OAUTH2_JWT_KEY = 'level5abba-secret'
     OAUTH2_JWT_ALG = 'HS256'
     OAUTH2_JWT_EXP = 3600
@@ -376,7 +396,7 @@ class Level5abbbDevConfig(DevConfig):
     MONGO_URI = "mongodb://" + DevConfig.MONGODB_HOST + ":27017/level5abbb"
     # OAUth2
     OAUTH2_JWT_ENABLED = True
-    OAUTH2_JWT_ISS = 'http://localhost:5007/'
+    OAUTH2_JWT_ISS = DevConfig.level4abb_host
     OAUTH2_JWT_KEY = 'level5abbb-secret'
     OAUTH2_JWT_ALG = 'HS256'
     OAUTH2_JWT_EXP = 3600

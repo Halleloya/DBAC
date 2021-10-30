@@ -1,3 +1,4 @@
+import os
 """
 Preconfig the providers information for each directory
 
@@ -17,17 +18,24 @@ when application starts. Alternatively, providers can be registerd using 'oauth.
 afterward and persistent into databases for long-term reuse.
 """
 
+level2a_service = "http://localhost:5002"
+level2b_service = "http://localhost:5003"
+
+if os.getenv('CDN_DOMAIN'):
+    level2a_service = "http://droit-level2a-service:5002"
+    level2b_service = "http://droit-level2b-service:5003"
+
 providers_config = {
     # providers for level1 directory.
     "level1": {
         "level2a": {
             "client_id": 'm8d8ZjrMRQNuupmNsJT5m0qT',
             "client_secret": 'kRDS2qX47fcA3Oc9DPOvWg7TrUMFYPJDw5LYO7obVegYbMLN',
-            "access_token_url": 'http://localhost:5002/auth/oidc_token',
+            "access_token_url": '/auth/oidc_token',
             "access_token_params": None,
-            "authorize_url": 'http://localhost:5002/auth/oidc_authorize',
+            "authorize_url": level2a_service + '/auth/oidc_authorize',
             "authorize_params": None,
-            "api_base_url": 'http://localhost:5002/api',
+            "api_base_url": level2a_service + '/api',
             "client_kwargs": {
                 'scope': 'openid profile',
                 'token_endpoint_auth_method': 'client_secret_basic'}
@@ -56,11 +64,11 @@ providers_config = {
         "level2b": {
             "client_id": 'Fehc9PMy9Z0dxMYmIebMVVQw',
             "client_secret": 'XdOFOcm0QQo5JtXXfmqR4KzP7SVCddHhByyUyvFpLYGorLIk',
-            "access_token_url": 'http://localhost:5003/auth/oidc_token',
+            "access_token_url": level2b_service + '/auth/oidc_token',
             "access_token_params": None,
-            "authorize_url": 'http://localhost:5003/auth/oidc_authorize',
+            "authorize_url": level2b_service + '/auth/oidc_authorize',
             "authorize_params": None,
-            "api_base_url": 'http://localhost:5003/api',
+            "api_base_url": level2b_service + '/api',
             "client_kwargs": {
                 'scope': 'openid profile address phone_number',
                 'token_endpoint_auth_method': 'client_secret_basic'}
