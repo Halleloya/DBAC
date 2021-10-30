@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: droit-ingress
+  # annotations:
+    # nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - host: level1.dbac.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: droit-master-service
+                port:
+                  number: 5001

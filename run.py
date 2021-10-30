@@ -9,7 +9,7 @@ from Droit.auth.oauth2 import oauth, config_oauth, initiate_providers
 from config import dev_config
 from Droit.utils import register_new_schema
 from Droit.views import GeographyHelper
-
+from flask_cdn import CDN
 
 @click.command()
 @click.option('--init-db', default=True, type=bool, help="Clean previous data and insert URL mappings into database.\nBy default it's True")
@@ -23,6 +23,7 @@ def main(level, init_db, debug, host):
     """
 
     app = create_app()
+
     # initialize Flask app
     app_config = dev_config[level]
     app.config.update(**app_config.to_dict())
@@ -48,6 +49,12 @@ def main(level, init_db, debug, host):
         init_dir_to_url(level)
         init_target_to_child_name(level)
     GeographyHelper.AddLevelBoundingBox(level, dev_config[level].BOUNDING_BOX_COORDS)
+
+    # # cdn
+    app.config['CDN_DOMAIN'] = 'hbac.s3.us-west-2.amazonaws.com'
+    cdn = CDN()
+    cdn.init_app(app)
+
     app.run(debug = debug, host=host, port= app.config["PORT"])
 
 if __name__ == "__main__":

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: droit-configmap
+data:
+  level2a_url: level2a.dbac.com
+  level2b_url: level2b.dbac.com
+  level3aa_url: level3aa.dbac.com
+  level3ab_url: level3ab.dbac.com
+  level4aba_url: level4aba.dbac.com
+  level4abb_url: level4abb.dbac.com
+  level5abba_url: level5abba.dbac.com
+  level5abbb_url: level5abbb.dbac.com
+  level1_url: level1.dbac.com

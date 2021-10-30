@@ -47,3 +47,4 @@ Werkzeug==0.16.0
 wincertstore==0.2
 wrapt==1.11.2
 WTForms==2.2.1
+flask_cdn

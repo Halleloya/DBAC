@@ -7,7 +7,7 @@ metadata:
     app: droit
     env: test
 spec:
-  replicas: 3
+  replicas: 2
   template:
     metadata:
       name: droit-master-pod
@@ -34,6 +34,51 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+            - name: LEVEL1_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level1_url
+            - name: LEVEL2A_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2a_url
+            - name: LEVEL2B_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2b_url
+            - name: LEVEL3AA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3aa_url
+            - name: LEVEL3AB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3ab_url
+            - name: LEVEL4ABA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4aba_url
+            - name: LEVEL4ABB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4abb_url
+            - name: LEVEL5ABBA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abba_url
+            - name: LEVEL5ABBB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abbb_url
   selector:
     matchLabels:
       app: droit-master
@@ -85,6 +130,51 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+            - name: LEVEL1_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level1_url
+            - name: LEVEL2A_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2a_url
+            - name: LEVEL2B_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2b_url
+            - name: LEVEL3AA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3aa_url
+            - name: LEVEL3AB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3ab_url
+            - name: LEVEL4ABA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4aba_url
+            - name: LEVEL4ABB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4abb_url
+            - name: LEVEL5ABBA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abba_url
+            - name: LEVEL5ABBB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abbb_url
   selector:
     matchLabels:
       app: droit-level2a
@@ -136,6 +226,51 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+            - name: LEVEL1_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level1_url
+            - name: LEVEL2A_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2a_url
+            - name: LEVEL2B_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2b_url
+            - name: LEVEL3AA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3aa_url
+            - name: LEVEL3AB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3ab_url
+            - name: LEVEL4ABA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4aba_url
+            - name: LEVEL4ABB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4abb_url
+            - name: LEVEL5ABBA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abba_url
+            - name: LEVEL5ABBB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abbb_url
   selector:
     matchLabels:
       app: droit-level2b
@@ -187,6 +322,51 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+            - name: LEVEL1_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level1_url
+            - name: LEVEL2A_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2a_url
+            - name: LEVEL2B_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2b_url
+            - name: LEVEL3AA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3aa_url
+            - name: LEVEL3AB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3ab_url
+            - name: LEVEL4ABA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4aba_url
+            - name: LEVEL4ABB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4abb_url
+            - name: LEVEL5ABBA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abba_url
+            - name: LEVEL5ABBB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abbb_url
   selector:
     matchLabels:
       app: droit-level3aa
@@ -237,6 +417,51 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+            - name: LEVEL1_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level1_url
+            - name: LEVEL2A_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2a_url
+            - name: LEVEL2B_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2b_url
+            - name: LEVEL3AA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3aa_url
+            - name: LEVEL3AB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3ab_url
+            - name: LEVEL4ABA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4aba_url
+            - name: LEVEL4ABB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4abb_url
+            - name: LEVEL5ABBA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abba_url
+            - name: LEVEL5ABBB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abbb_url
   selector:
     matchLabels:
       app: droit-level3ab
@@ -287,6 +512,51 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+            - name: LEVEL1_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level1_url
+            - name: LEVEL2A_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2a_url
+            - name: LEVEL2B_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2b_url
+            - name: LEVEL3AA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3aa_url
+            - name: LEVEL3AB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3ab_url
+            - name: LEVEL4ABA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4aba_url
+            - name: LEVEL4ABB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4abb_url
+            - name: LEVEL5ABBA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abba_url
+            - name: LEVEL5ABBB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abbb_url
   selector:
     matchLabels:
       app: droit-level4aba
@@ -337,6 +607,51 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+            - name: LEVEL1_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level1_url
+            - name: LEVEL2A_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2a_url
+            - name: LEVEL2B_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2b_url
+            - name: LEVEL3AA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3aa_url
+            - name: LEVEL3AB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3ab_url
+            - name: LEVEL4ABA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4aba_url
+            - name: LEVEL4ABB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4abb_url
+            - name: LEVEL5ABBA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abba_url
+            - name: LEVEL5ABBB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abbb_url
   selector:
     matchLabels:
       app: droit-level4abb
@@ -387,6 +702,51 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+            - name: LEVEL1_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level1_url
+            - name: LEVEL2A_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2a_url
+            - name: LEVEL2B_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2b_url
+            - name: LEVEL3AA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3aa_url
+            - name: LEVEL3AB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3ab_url
+            - name: LEVEL4ABA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4aba_url
+            - name: LEVEL4ABB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4abb_url
+            - name: LEVEL5ABBA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abba_url
+            - name: LEVEL5ABBB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abbb_url
   selector:
     matchLabels:
       app: droit-level5abba
@@ -437,6 +797,51 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+            - name: LEVEL1_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level1_url
+            - name: LEVEL2A_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2a_url
+            - name: LEVEL2B_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level2b_url
+            - name: LEVEL3AA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3aa_url
+            - name: LEVEL3AB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level3ab_url
+            - name: LEVEL4ABA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4aba_url
+            - name: LEVEL4ABB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level4abb_url
+            - name: LEVEL5ABBA_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abba_url
+            - name: LEVEL5ABBB_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: droit-configmap
+                  key: level5abbb_url
   selector:
     matchLabels:
       app: droit-level5abbb
