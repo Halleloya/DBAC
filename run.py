@@ -1,4 +1,5 @@
 import click
+import os
 import subprocess
 from flask_mongoengine import MongoEngine
 from Droit import create_app
@@ -51,9 +52,10 @@ def main(level, init_db, debug, host):
     GeographyHelper.AddLevelBoundingBox(level, dev_config[level].BOUNDING_BOX_COORDS)
 
     # # cdn
-    app.config['CDN_DOMAIN'] = 'hbac.s3.us-west-2.amazonaws.com'
-    cdn = CDN()
-    cdn.init_app(app)
+    if os.getenv('CDN_DOMAIN'):
+        app.config['CDN_DOMAIN'] = 'hbac.s3.us-west-2.amazonaws.com'
+        cdn = CDN()
+        cdn.init_app(app)
 
     app.run(debug = debug, host=host, port= app.config["PORT"])
 

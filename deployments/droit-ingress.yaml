@@ -2,8 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: droit-level1-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  # annotations:
+    # nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
     - http:

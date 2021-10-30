@@ -34,6 +34,8 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+            - name: CDN_DOMAIN
+              value: hbac.s3.us-west-2.amazonaws.com
   selector:
     matchLabels:
       app: droit-master
@@ -85,6 +87,8 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+            - name: CDN_DOMAIN
+              value: hbac.s3.us-west-2.amazonaws.com
   selector:
     matchLabels:
       app: droit-level2a
@@ -136,6 +140,8 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+            - name: CDN_DOMAIN
+              value: hbac.s3.us-west-2.amazonaws.com
   selector:
     matchLabels:
       app: droit-level2b
@@ -187,6 +193,8 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+            - name: CDN_DOMAIN
+              value: hbac.s3.us-west-2.amazonaws.com
   selector:
     matchLabels:
       app: droit-level3aa
@@ -237,6 +245,8 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+            - name: CDN_DOMAIN
+              value: hbac.s3.us-west-2.amazonaws.com
   selector:
     matchLabels:
       app: droit-level3ab
@@ -287,6 +297,8 @@ spec:
 #                 secretKeyRef:
 #                   name: mongodb-secret
 #                   key: mongo-root-password
+#             - name: CDN_DOMAIN
+#               value: hbac.s3.us-west-2.amazonaws.com
 #   selector:
 #     matchLabels:
 #       app: droit-level4aba
@@ -337,6 +349,8 @@ spec:
 #                 secretKeyRef:
 #                   name: mongodb-secret
 #                   key: mongo-root-password
+#             - name: CDN_DOMAIN
+#               value: hbac.s3.us-west-2.amazonaws.com
 #   selector:
 #     matchLabels:
 #       app: droit-level4abb
@@ -387,6 +401,8 @@ spec:
 #                 secretKeyRef:
 #                   name: mongodb-secret
 #                   key: mongo-root-password
+#             - name: CDN_DOMAIN
+#               value: hbac.s3.us-west-2.amazonaws.com
 #   selector:
 #     matchLabels:
 #       app: droit-level5abba
@@ -437,6 +453,8 @@ spec:
 #                 secretKeyRef:
 #                   name: mongodb-secret
 #                   key: mongo-root-password
+#             - name: CDN_DOMAIN
+#               value: hbac.s3.us-west-2.amazonaws.com
 #   selector:
 #     matchLabels:
 #       app: droit-level5abbb
