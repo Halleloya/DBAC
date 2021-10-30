@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: droit-level1-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: droit-master-service
+                port:
+                  number: 5001
+          - path: /level1(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: droit-master-service
+                port:
+                  number: 5001
+          - path: /level2a(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: droit-level2a-service
+                port:
+                  number: 5002

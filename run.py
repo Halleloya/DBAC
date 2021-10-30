@@ -22,7 +22,7 @@ def main(level, init_db, debug, host):
     Load all configurations for the application, and then start running
     """
 
-    app = create_app()
+    app = create_app(level)
 
     # initialize Flask app
     app_config = dev_config[level]
