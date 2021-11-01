@@ -16,8 +16,12 @@
             <td>{{ directory.directory_name }}</td>
             <td>{{ directory.relationship }}</td>
             <td>
-                <a class="btn btn-primary" href="{{  directory.url }}{{url_for('dashboard.home')}}">Go</a>
-
+                {% if 'level' in url_for('dashboard.home') %}
+                    {% set url = "/".join(url_for('dashboard.home').split("/")[:1] + url_for('dashboard.home').split("/")[2:]) %}
+                    <a class="btn btn-primary" href="{{  directory.url }}{{ url }}">Go</a>
+                {% else %}
+                    <a class="btn btn-primary" href="{{  directory.url }}{{url_for('dashboard.home')}}">Go</a>
+                {% endif %}
             </td>
             <td>
 

@@ -1,24 +1,71 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: droit-ingress
-  # annotations:
-    # nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: droit-level1-ingress
 spec:
   rules:
     - http:
         paths:
-          - path: /level1(/|$)(.*)
+          - path: /level1
             pathType: Prefix
             backend:
               service:
                 name: droit-master-service
                 port:
                   number: 5001
-          - path: /level2a(/|$)(.*)
+          - path: /level2a
             pathType: Prefix
             backend:
               service:
                 name: droit-level2a-service
                 port:
                   number: 5002
+          - path: /level2b
+            pathType: Prefix
+            backend:
+              service:
+                name: droit-level2b-service
+                port:
+                  number: 5003
+          - path: /level3aa
+            pathType: Prefix
+            backend:
+              service:
+                name: droit-level3aa-service
+                port:
+                  number: 5004
+          - path: /level3ab
+            pathType: Prefix
+            backend:
+              service:
+                name: droit-level3ab-service
+                port:
+                  number: 5005
+          - path: /level4aba
+            pathType: Prefix
+            backend:
+              service:
+                name: droit-level4aba-service
+                port:
+                  number: 5006
+          - path: /level4abb
+            pathType: Prefix
+            backend:
+              service:
+                name: droit-level4abb-service
+                port:
+                  number: 5007
+          - path: /level5abba
+            pathType: Prefix
+            backend:
+              service:
+                name: droit-level5abba-service
+                port:
+                  number: 5008
+          - path: /level5abbb
+            pathType: Prefix
+            backend:
+              service:
+                name: droit-level5abbb-service
+                port:
+                  number: 5009
