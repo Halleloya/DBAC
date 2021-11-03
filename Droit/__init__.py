@@ -22,15 +22,15 @@ def create_app(level: str) -> Flask:
     login_manager.init_app(app)
 
     # load views(routers)
-    if os.getenv('CDN_DOMAIN'):
-        app.register_blueprint(home, url_prefix = '/' + level)
-        app.register_blueprint(api, url_prefix = '/'+ level +'/api')
-        app.register_blueprint(dashboard, url_prefix='/'+ level +'/dashboard')
-        app.register_blueprint(auth, url_prefix='/'+ level +'/auth')
-    else:
-        app.register_blueprint(home, url_prefix = '/')
-        app.register_blueprint(api, url_prefix = '/api')
-        app.register_blueprint(dashboard, url_prefix='/dashboard')
-        app.register_blueprint(auth, url_prefix='/auth')
+    # if os.getenv('CDN_DOMAIN'):
+    #     app.register_blueprint(home, url_prefix = '/' + level)
+    #     app.register_blueprint(api, url_prefix = '/'+ level +'/api')
+    #     app.register_blueprint(dashboard, url_prefix='/'+ level +'/dashboard')
+    #     app.register_blueprint(auth, url_prefix='/'+ level +'/auth')
+    # else:
+    app.register_blueprint(home, url_prefix = '/')
+    app.register_blueprint(api, url_prefix = '/api')
+    app.register_blueprint(dashboard, url_prefix='/dashboard')
+    app.register_blueprint(auth, url_prefix='/auth')
     register_error_page(app)
     return app

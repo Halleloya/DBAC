@@ -9,31 +9,31 @@
   <div class="row sidebar-row">
     <div class="col-md-3 menus list-group">
       <a class="list-group-item list-group-item-action {{ 'active' if tagname == 'home' else '' }}"
-        href="{{ url_for('dashboard.home')}}">
+        href="{{ prefix }}{{ url_for('dashboard.home')}}">
         Directories
       </a>
       <a class="list-group-item list-group-item-action {{ 'active' if tagname == 'register' else '' }}"
-        href="{{ url_for('dashboard.register') }}">
+        href="{{ prefix }}{{ url_for('dashboard.register') }}">
         Register
       </a>
       <a class="list-group-item list-group-item-action {{ 'active' if tagname == 'policy' else '' }}"
-        href="{{ url_for('dashboard.policy') }}">
+        href="{{ prefix }}{{ url_for('dashboard.policy') }}">
         Policy
       </a>
       <a class="list-group-item list-group-item-action {{ 'active' if tagname == 'query' else '' }}"
-        href="{{ url_for('dashboard.query')}}">
+        href="{{ prefix }}{{ url_for('dashboard.query')}}">
         Query
       </a>
       <a class="list-group-item list-group-item-action {{ 'active' if tagname == 'script' else '' }}"
-        href="{{ url_for('dashboard.script')}}">
+        href="{{ prefix }}{{ url_for('dashboard.script')}}">
         Custom Script Query
       </a>
       <a class="list-group-item list-group-item-action {{ 'active' if tagname == 'delete' else '' }}"
-        href="{{ url_for('dashboard.delete')}}">
+        href="{{ prefix }}{{ url_for('dashboard.delete')}}">
         Delete
       </a>
       <a class="list-group-item list-group-item-action {{ 'active' if tagname == 'relocate' else '' }}"
-        href="{{ url_for('dashboard.relocate')}}">
+        href="{{ prefix }}{{ url_for('dashboard.relocate')}}">
         Relocate
       </a>
       <hr>
@@ -75,4 +75,18 @@
 {{ super() }}
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 <script src="{{url_for('static', filename='js/jquery.json-editor.min.js')}}"></script>
+<script>
+  if(window.location.pathname.indexOf("level") != -1) {
+    REGISTER_URL = "/{{ config['HOST_NAME'] }}" + '/api/register';
+    POLICY_URL = "/{{ config['HOST_NAME'] }}" + '/api/policy';
+    POLICY_DECISION_URL = "/{{ config['HOST_NAME'] }}" + '/api/policy_decision';
+    ATTRIBUTE_AUTH_URL = "/{{ config['HOST_NAME'] }}" + '/api/policy_attribute_auth'
+    POLICY_DELETION_URL = "/{{ config['HOST_NAME'] }}" + '/api/delete_policy';
+    JWT_API = "/{{ config['HOST_NAME'] }}" + '/api/jwt';
+    SEARCH_API = "/{{ config['HOST_NAME'] }}" + '/api/search';
+    DELETE_API = "/{{ config['HOST_NAME'] }}" + '/api/delete';
+    RELOCATE_API = "/{{ config['HOST_NAME'] }}" + '/api/relocate';
+    SCRIPT_API = "/{{ config['HOST_NAME'] }}" + '/api/custom_query';
+  }
+</script>
 {% endblock script%}

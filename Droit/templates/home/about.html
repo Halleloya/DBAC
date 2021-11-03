@@ -32,4 +32,18 @@
 {{ super() }}
 <script src="{{url_for('static', filename='js/about.js')}}"></script>
 <script src="{{url_for('static', filename='js/dashboard.js')}}"></script>
+<script>
+  if(window.location.pathname.indexOf("level") != -1) {
+    var REGISTER_URL = "{{ config['HOST_NAME'] }}" + '/api/register';
+    var POLICY_URL = "{{ config['HOST_NAME'] }}" + '/api/policy';
+    var POLICY_DECISION_URL = "{{ config['HOST_NAME'] }}" + '/api/policy_decision';
+    var ATTRIBUTE_AUTH_URL = "{{ config['HOST_NAME'] }}" + '/api/policy_attribute_auth'
+    var POLICY_DELETION_URL = "{{ config['HOST_NAME'] }}" + '/api/delete_policy';
+    var JWT_API = "{{ config['HOST_NAME'] }}" + '/api/jwt';
+    var SEARCH_API = "{{ config['HOST_NAME'] }}" + '/api/search';
+    var DELETE_API = "{{ config['HOST_NAME'] }}" + '/api/delete';
+    var RELOCATE_API = "{{ config['HOST_NAME'] }}" + '/api/relocate';
+    var SCRIPT_API = "{{ config['HOST_NAME'] }}" + '/api/custom_query';
+  }
+</script>
 {% endblock script%}

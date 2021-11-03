@@ -34,7 +34,7 @@
             {{ form.remember_me.label(class = 'form-check-label') }}
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-        <a type="button" class="btn btn-secondary oidc-login float-right" href="{{ url_for('auth.oidc_login')}}">Sign In With Other Account</a>
+        <a type="button" class="btn btn-secondary oidc-login float-right" href="{{ prefix }}{{ url_for('auth.oidc_login')}}">Sign In With Other Account</a>
 
       </form>
 </div>

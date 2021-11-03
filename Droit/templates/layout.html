@@ -17,9 +17,13 @@
 </head>
 
 <body>
+    {% set prefix = "" %}
+    {% if "CDN_DOMAIN" in config %}
+    {% set prefix = "/" + config['HOST_NAME'] %}
+    {% endif %}
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{{url_for('home.index')}}">
+            <a class="navbar-brand" href="{{ prefix }}{{ url_for('home.index')}}">
                 <h1>Droit - {{ config['HOST_NAME'] }}</h1>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -30,33 +34,33 @@
                 <ul class="navbar-nav ml-auto">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('home.index')}}">Home</a>
+                        <a class="nav-link" href="{{ prefix }}{{ url_for('home.index')}}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('dashboard.home')}}">Things</a>
+                        <a class="nav-link" href="{{ prefix }}{{ url_for('dashboard.home')}}">Things</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('home.about')}}">Profile</a>
+                        <a class="nav-link" href="{{ prefix }}{{ url_for('home.about')}}">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('home.index')}}">Contact</a>
+                        <a class="nav-link" href="{{ prefix }}{{ url_for('home.index')}}">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('auth.oauth_list')}}">OpenID</a>
+                        <a class="nav-link" href="{{ prefix }}{{ url_for('auth.oauth_list')}}">OpenID</a>
                     </li>
                     {% if current_user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('home.index')}}">Hi, {{current_user.username}}</a>
+                        <a class="nav-link" href="{{ prefix }}{{ url_for('home.index')}}">Hi, {{current_user.username}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('auth.logout')}}">Logout</a>
+                        <a class="nav-link" href="{{ prefix }}{{ url_for('auth.logout')}}">Logout</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('auth.login')}}">Login</a>
+                        <a class="nav-link" href="{{ prefix }}{{ url_for('auth.login')}}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('auth.register')}}">Register</a>
+                        <a class="nav-link" href="{{ prefix }}{{ url_for('auth.register')}}">Register</a>
                     </li>
 
                     {% endif %}

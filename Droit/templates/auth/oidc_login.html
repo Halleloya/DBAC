@@ -8,7 +8,7 @@
 <div class="container">
     <div class="list-group">
       {% for provider_name in providers %}
-      <a href="{{ url_for('auth.oidc_login', provider_name = provider_name) }}" class="list-group-item list-group-item-action text-primary text-center text-capitalize">Sign In With <b>{{ provider_name }}</b></a>
+      <a href="{{ prefix }}{{ url_for('auth.oidc_login', provider_name = provider_name) }}" class="list-group-item list-group-item-action text-primary text-center text-capitalize">Sign In With <b>{{ provider_name }}</b></a>
       {% endfor %}
       </div>
 </div>
