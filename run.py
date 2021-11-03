@@ -56,6 +56,26 @@ def main(level, init_db, debug, host):
         app.config['CDN_DOMAIN'] = 'hbac.s3.us-west-2.amazonaws.com'
         cdn = CDN()
         cdn.init_app(app)
+        app.config['level1'] = "http://droit-master-service:5001"
+        app.config['level2a'] = "http://droit-level2a-service:5002"
+        app.config['level2b'] = "http://droit-level2b-service:5003"
+        app.config['level3aa'] = "http://droit-level3aa-service:5004"
+        app.config['level3ab'] = "http://droit-level3ab-service:5005"
+        app.config['level4aba'] = "http://droit-level4aba-service:5006"
+        app.config['level4abb'] = "http://droit-level4abb-service:5007"
+        app.config['level5abba'] = "http://droit-level5abba-service:5008"
+        app.config['level5abbb'] = "http://droit-level5abbb-service:5009"
+        app.config['level'] = level
+        app.config['level1_redirect_url'] = "/level1"
+        app.config['level2a_redirect_url'] = "/level2a"
+        app.config['level2b_redirect_url'] = "/level2b"
+        app.config['level3aa_redirect_url'] = "/level3aa"
+        app.config['level3ab_redirect_url'] = "/level3ab"
+        app.config['level4aba_redirect_url'] = "/level4aba"
+        app.config['level4abb_redirect_url'] = "/level4abb"
+        app.config['level5abba_redirect_url'] = "/level5abba"
+        app.config['level5abbb_redirect_url'] = "/level5abbb"
+        app.config['level'] = level
 
     app.run(debug = debug, host=host, port= app.config["PORT"])
 

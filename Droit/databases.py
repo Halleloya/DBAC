@@ -46,6 +46,8 @@ def init_dir_to_url(level: str) -> None:
     if level == "level1":
         DirectoryNameToURL(directory_name='master',
                            url=level1_host, relationship='master').save()
+        DirectoryNameToURL(directory_name='level1',
+                           url=level1_host, relationship='master').save()
         DirectoryNameToURL(directory_name='level2a',
                            url=level2a_host, relationship='child').save()
         DirectoryNameToURL(directory_name='level2b',

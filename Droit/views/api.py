@@ -1,10 +1,11 @@
 import json
 import copy
+from logging import Logger
 import requests
 import uuid
 import re
 import jwt
-from flask import Blueprint, request, url_for, redirect, Response, make_response, jsonify, session, render_template
+from flask import Blueprint, config, request, url_for, redirect, Response, make_response, jsonify, session, render_template
 from flask import current_app as app
 from flask_login import current_user as user
 from py_abac import PDP, AccessRequest, Policy
@@ -77,7 +78,7 @@ def push_up_things(thing_description: dict, publicity: int) -> bool:
         return True
 
     # 2. send push up request to the parent url
-    parent_url = urljoin(parent_directory.url, url_for('api.register'))
+    parent_url = urljoin(app.config[parent_directory.directory_name] + parent_directory.url if parent_directory.directory_name in app.config else parent_directory.url, url_for('api.register'))
     request_data = {
         "td": thing_description,
         "location": parent_directory.directory_name,
@@ -105,7 +106,8 @@ def delete_up_things(thing_id: str) -> bool:
     if parent_dir is not None:
         query_parameters = urlencode(
             {"location": parent_dir.directory_name, "thing_id": thing_id})
-        request_url = f"{urljoin(parent_dir.url, url_for('api.delete'))}?{query_parameters}"
+        par_url = app.config[parent_dir.directory_name] + parent_dir.url if parent_dir.directory_name in app.config else parent_dir.url
+        request_url = f"{urljoin(par_url, url_for('api.delete'))}?{query_parameters}"
         try:
             response = requests.delete(request_url)
         except:
@@ -130,9 +132,10 @@ def add_parent_aggregation(thing_type: str, location: str) -> bool:
         return True
 
     request_body = {"location": location, "thing_type": thing_type}
-    request_url = urljoin(parent_dir.url, url_for(
+    par_url = app.config[parent_dir.directory_name] + parent_dir.url if parent_dir.directory_name in app.config else parent_dir.url
+    request_url = urljoin(par_url, url_for(
         'api.update_type_aggregation'))
-
+    
     response = requests.post(request_url, data=json.dumps(request_body), headers={
         'Content-Type': 'application/json',
         'Accept-Charset': 'UTF-8'
@@ -157,7 +160,8 @@ def delete_parent_aggregation(thing_type: str, location: str) -> bool:
         return True
     query_parameters = urlencode(
         {"location": location, "thing_type": thing_type})
-    request_url = f"{urljoin(parent_dir.url, url_for('api.update_type_aggregation'))}?{query_parameters}"
+    par_url = app.config[parent_dir.directory_name] + parent_dir.url if parent_dir.directory_name in app.config else parent_dir.url
+    request_url = f"{urljoin(par_url, url_for('api.update_type_aggregation'))}?{query_parameters}"
     try:
         response = requests.delete(request_url)
     except:
@@ -988,7 +992,8 @@ def dfs_level_details():
     if locations_to_urls == None:
         return None
     for location_to_url in locations_to_urls:
-        request_url = urljoin(location_to_url.url, url_for('api.dfs_level_details'))
+        loc_url = app.config[location_to_url.directory_name] + location_to_url.url if location_to_url.directory_name in app.config else location_to_url.url
+        request_url = urljoin(loc_url, url_for('api.dfs_level_details'))
         try:
             response = requests.get(request_url)
             if response.status_code != 200:
@@ -1015,7 +1020,9 @@ def get_all_level_details():
     if len(level_details_cache) > 0:
         return level_details_cache
     location_to_url = DirectoryNameToURL.objects(relationship='master').first()
-    request_url = urljoin(location_to_url.url, url_for('api.dfs_level_details'))
+    if "level" in app.config:
+        location_to_url = app.config[location_to_url.directory_name]
+    request_url = urljoin(location_to_url, url_for('api.dfs_level_details'))
     try:
         response = requests.get(request_url)
         if response.status_code != 200:
