@@ -56,6 +56,7 @@ def main(level, init_db, debug, host):
         app.config['CDN_DOMAIN'] = 'hbac.s3.us-west-2.amazonaws.com'
         cdn = CDN()
         cdn.init_app(app)
+        app.config['master'] = "http://droit-master-service:5001"
         app.config['level1'] = "http://droit-master-service:5001"
         app.config['level2a'] = "http://droit-level2a-service:5002"
         app.config['level2b'] = "http://droit-level2b-service:5003"
