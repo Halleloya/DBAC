@@ -16,6 +16,7 @@ different and related modules:
 
 """
 import hashlib
+from logging import Logger
 import uuid
 import time
 import jwt
@@ -26,10 +27,11 @@ from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import gen_salt
 from authlib.oauth2 import OAuth2Error
 import requests
-
+from flask import current_app as app
 from ..forms import UserRegisterForm, UserLoginForm
 from ..auth import login_manager
 from .models import auth_db, User, UserAccountTypeEnum, OAuth2Client, AuthAttribute
+from ..models import DirectoryNameToURL
 from .oauth2 import oauth, authorization
 from .forms import OAuthClientRegisterForm
 from ..auth.providers_config import oauth2_server_config
@@ -111,7 +113,10 @@ def oidc_create_client():
 
         auth_db.session.add(client)
         auth_db.session.commit()
-        return redirect(url_for('auth.oauth_list'))
+        dir_url = ""
+        if "level" in app.config:
+            dir_url = app.config[app.config["level"] +"_redirect_url"]
+        return redirect(dir_url + url_for('auth.oauth_list'))
 
     return render_template('/auth/oidc_create_client.html', form=oauth_client_form)
 
@@ -133,7 +138,10 @@ def oidc_consent_authorize():
         if request.method == 'GET':
             # 1. if user is not logged in, redirect to log in user
             if current_user.is_anonymous:
-                redirect_response = redirect(url_for('auth.login', oauth_authorization=True, **request.args))
+                dir_url = ""
+                if "level" in app.config:
+                    dir_url = app.config[app.config["level"] +"_redirect_url"]
+                redirect_response = redirect(dir_url + url_for('auth.login', oauth_authorization=True, **request.args))
                 return redirect_response
             # 2. check whether the client info is valid
             try:
@@ -250,11 +258,16 @@ def oidc_auth_code_process(provider_name):
     if 'phone_number' in user_scope.split():
         set_auth_user_attr('phone_number', user_info['phone_number'])
 
+    dir_url = ""
+    if "level" in app.config:
+        dir_url = DirectoryNameToURL.objects(
+            directory_name=app.config["level"]).first().url
+
     if user_scope != 'openid profile':
         # redirect to /info_authorize
-        return redirect(url_for('auth.info_authorize'))
+        return redirect(dir_url + url_for('auth.info_authorize'))
 
-    return redirect(url_for('home.index'))
+    return redirect(dir_url + url_for('home.index'))
 
 
 """
@@ -275,11 +288,15 @@ def login():
             login_user(user, remember=user_form.remember_me)
             # clear_auth_attributes()
             # check whether it's from authorize page. If so, redirect back, with same request parameters
+            dir_url = ""
+            if "level" in app.config:
+                dir_url = DirectoryNameToURL.objects(
+                    directory_name=app.config["level"]).first().url
             if "oauth_authorization" in request.args:
-                return redirect(url_for('auth.oidc_consent_authorize', **request.args))
+                return redirect(dir_url + url_for('auth.oidc_consent_authorize', **request.args))
             else:
                 # local login, redirect to home page
-                return redirect(url_for('home.index'))
+                return redirect(dir_url + url_for('home.index'))
         else:
             user_form.password.errors.append("email/password incorrect")
             return render_template('auth/login.html', form=user_form)
@@ -313,7 +330,11 @@ def register():
             # login success, record it using flask-login
             login_user(new_user)
             # clear_auth_attributes()
-            return redirect(url_for('home.index'))
+            dir_url = ""
+            if "level" in app.config:
+                dir_url = DirectoryNameToURL.objects(
+                    directory_name=app.config["level"]).first().url
+            return redirect(dir_url + url_for('home.index'))
         else:
             # User already exist, return to the register page and show the error
             user_form.email.errors.append("User email already exist")
@@ -329,7 +350,11 @@ def logout():
     """
     clear_auth_attributes()
     logout_user()
-    return redirect(url_for('home.index'))
+    dir_url = ""
+    if "level" in app.config:
+        dir_url = DirectoryNameToURL.objects(
+            directory_name=app.config["level"]).first().url
+    return redirect(dir_url + url_for('home.index'))
 
 
 def get_hashed_password(raw_password, salt=None):
@@ -384,8 +409,11 @@ def info_authorize():
                 set_auth_user_attr('polygon', polygon)
                 continue
             scope_checks.append(scope_ch)
+        dir_url = ""
+        if "level" in app.config:
+            dir_url = app.config[app.config["level"] +"_redirect_url"]
         if len(scope_checks) == 0:
-            return redirect(url_for('dashboard.query'))
+            return redirect(dir_url + url_for('dashboard.query'))
         print("scope_checks scope_checks scope_checks scope_checks scope_checks")
         print("scope_checks: ", scope_checks)
         session['add_user_scope'] = scope_check(add_user_scope, scope_checks)
@@ -403,7 +431,7 @@ def info_authorize():
         else:
             set_auth_user_attr('address', current_user.get_address())
             set_auth_user_attr('phone_number', current_user.get_phone())
-            return redirect(url_for('auth.info_authorize'))
+            return redirect(dir_url + url_for('auth.info_authorize'))
 
     elif request.method == 'GET':
         # authorization for additional info started
@@ -421,7 +449,7 @@ def info_authorize():
             print("add_server_scope.split(): ", add_server_scope.split())
             return server_auth_request(oauth2_server_config)
 
-        return redirect(url_for('dashboard.query'))
+        return redirect(dir_url + url_for('dashboard.query'))
 
 
 def server_auth_request(server_config):

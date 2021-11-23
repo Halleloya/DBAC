@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for
 from flask_login import current_user
+from flask import current_app as app
 from ..utils import get_auth_attributes
+from ..models import DirectoryNameToURL
 home = Blueprint('home', __name__)
 
 
@@ -25,7 +27,10 @@ def about():
     """
     if current_user.is_anonymous:
         # redirect to login page if not logged in
-        return redirect(url_for('auth.login'))
+        dir_url = ""
+        if "level" in app.config:
+            dir_url = app.config[app.config["level"] +"_redirect_url"]
+        return redirect(dir_url + url_for('auth.login'))
     username = current_user.get_username()
     email = current_user.get_email()
     address = current_user.get_address()

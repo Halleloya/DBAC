@@ -2,6 +2,7 @@
 Functions declared in this file are helper functions that can be shared by all other modules
 """
 import flask
+from flask import current_app as app
 import jwcrypto.jwk as jwk
 import jwt
 from urllib.parse import urljoin
@@ -83,20 +84,21 @@ def get_target_url(location: str, api: str = "") -> str:
     known_directory = DirectoryNameToURL.objects(
         directory_name=location).first()
     if known_directory is not None:
-        target_url = urljoin(known_directory.url, api)
+        target_url = urljoin(app.config[known_directory.directory_name] + known_directory.url if known_directory.directory_name in app.config else known_directory.url, api)
 
     # 2. check if the location is its descendants
     elif TargetToChildName.objects(target_name=location).first() is not None:
         descendant_directory = TargetToChildName.objects(
             target_name=location).first()
-        target_url = urljoin(DirectoryNameToURL.objects(
-            directory_name=descendant_directory.child_name).first().url, api)
+        descendant_obj = DirectoryNameToURL.objects(
+            directory_name=descendant_directory.child_name).first()
+        target_url = urljoin(app.config[descendant_obj.directory_name] + descendant_obj.url if descendant_obj.directory_name in app.config else descendant_obj.url, api)
 
     # 3. if current is not master directory, return the url of master directory
     elif DirectoryNameToURL.objects(relationship="parent").first() is not None:
-        master_url = DirectoryNameToURL.objects(
-            directory_name="master").first().url
-        target_url = urljoin(master_url, api)
+        master_obj = DirectoryNameToURL.objects(
+            directory_name="master").first()
+        target_url = urljoin(app.config[master_obj.directory_name] + master_obj.url if master_obj.directory_name in app.config else master_obj.url, api)
 
     return target_url
 

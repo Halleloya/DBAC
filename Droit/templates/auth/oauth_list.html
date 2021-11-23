@@ -31,7 +31,7 @@
         </div>
         <div class="col">
             <h2>Known OIDC Clients</h2>
-            <a type="button" class="btn btn-primary mb-2" href="{{ url_for('auth.oidc_create_client') }}">Register New Client</a>
+            <a type="button" class="btn btn-primary mb-2" href="{{ prefix }}{{ url_for('auth.oidc_create_client') }}">Register New Client</a>
             <div class="list-group">
                 {% for client in oauth_clients %}
                 <li class="list-group-item">

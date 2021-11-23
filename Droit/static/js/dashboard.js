@@ -1,13 +1,13 @@
-const REGISTER_URL = '/api/register';
-const POLICY_URL = '/api/policy';
-const POLICY_DECISION_URL = '/api/policy_decision';
-const ATTRIBUTE_AUTH_URL = '/api/policy_attribute_auth'
-const POLICY_DELETION_URL = '/api/delete_policy';
-const JWT_API = '/api/jwt';
-const SEARCH_API = '/api/search';
-const DELETE_API = '/api/delete';
-const RELOCATE_API = '/api/relocate';
-const SCRIPT_API = '/api/custom_query';
+var REGISTER_URL = '/api/register';
+var POLICY_URL = '/api/policy';
+var POLICY_DECISION_URL = '/api/policy_decision';
+var ATTRIBUTE_AUTH_URL = '/api/policy_attribute_auth'
+var POLICY_DELETION_URL = '/api/delete_policy';
+var JWT_API = '/api/jwt';
+var SEARCH_API = '/api/search';
+var DELETE_API = '/api/delete';
+var RELOCATE_API = '/api/relocate';
+var SCRIPT_API = '/api/custom_query';
 
 // to avoid redundant prompt messages
 let deleted_msg = false;
