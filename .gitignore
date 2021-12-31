@@ -13,3 +13,4 @@ __pycache__
 /Droit/data/*
 /data/*
 *.DS_Store
+/TestFiles/*

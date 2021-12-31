@@ -1,33 +1,33 @@
 # DBAC
 
-DBAC stands for Directory-Based Access Control. It combines distributed IoT directories and attribute-based access control. This directory application used to be named as "Droit". Therefore, the term "Droit" may appear in the source codes to refer to a directory.  
+DBAC stands for Directory-Based Access Control. It combines distributed IoT directories and attribute-based access control. This project prototypes DBAC. 
+
+Please cite the following paper if the project contributes to your work.
+```
+Luoyao Hao, Vibhas Naik, and Henning Schulzrinne, "DBAC: Directory-Based Access Control for Geographically Distributed IoT Systems", IEEE International Conference on Computer Communications (INFOCOM), 2022.
+```
 
 ## To bootstrap the project
 
-1. `git clone https://github.com/Halleloya/DABAC.git`.
-2. Create a virtual environment by running the following:
-''' sh
-python3 -m venv env
-source env/bin/activate
-pip3 install -r requirements.txt
-'''
-3.Install dependencies `pip install -r requirements.txt`. (Note: you might want to have a virtual environment, in case any potential package conflict)
-5. Configure the database, e.g., store your database in data/db (create a folder for it if it doesn't exist), and `mongod --dbpath data/db`. 
-6. Open another terminal and go to the same virtual environment.
-7. Run the shell `python runall.py` or `./run.sh` to run all levels of the directory. It create a simple tree-like topology for the geographically distributed directories. 
+1. Clone the project from this repository `git clone https://github.com/Halleloya/DABAC.git`.
+2. Create a virtual environment (taking virtualenv as an example) `python3 -m venv env`, `source env/bin/activate`.
+3. Install dependencies `pip3 install -r requirements.txt`. (Note: in the following we assume that you are using python3 and pip3.)
+4. Configure the database, e.g., store your database in data/db (create a folder for it if it doesn't exist), and `mongod --dbpath data/db`. 
+5. Open another terminal and go to the same virtual environment. Then, run the shell `python runall.py` or `./run.sh` to start all levels of the directory (i.e., a simple tree-like topology for the geographically distributed directories). 
 
 Sidenotes:
 
 To run a local directory in the current structure `python run.py --level [level name]`. Try `python run.py --help` for more information. 
 
-To run a single directory `python -m Droit.run`. It is easy and basically enough to test basic functions.
+To run a single directory `python -m Droit.run`. It is easy and basically enough to test directory functionalities.
 
 Please note that you are supposed to change the [ip] and [port] manually in the `config.py` file, if needed. 
 
 To disable InsecureTransportError of OAuth2 (as https is required, but run with http in localhost when starting the third-party services): add `export OAUTHLIB_INSECURE_TRANSPORT=1` and `export AUTHLIB_INSECURE_TRANSPORT=1` to your env/bin/activate, or just input this command everytime restart the virtual environment. Please be noted that you should never do that in your production. 
 
+The directory application used to be named as "Droit (Directories for IoT)". Therefore, the term "Droit" may appear in the source codes to refer to a single directory.  
 
-## A sample walk-through 
+## Structure of directories 
 
 Below we show a sample walk-through with a binary tree-like structure. By default (only for demo), directories are geographically distributed and connected with each other as this topology. The name convention uses letter 'a' or 'b' to denote the left and right children in a tree. For example, level4aab is connected to its parent directory level3aa and its children directories level5aaba and level5aabb.
 
@@ -40,20 +40,21 @@ level5aaaa level5aaab ...
 level6aaaaa level6aaaab ...
 ```
 
-## Settings
-
 By default, all the directoires run on localhost. The tree-like structure starts from port 5001, with the name of level1 (also called master directory or root directory). The single directory module named SingleDirectory runs on port 4999.
 
 MongoDB runs on its default port 27017. To run MongoDB on another port: add `--port [port]` when starting the database, and change the configure files to direct apps to database. 
 
-To release all the ports occupied by directories: `sudo kill -9 $(lsof -i:5001 -i:5002 -i:5003 -i:5004 -i:5005 -i:5006 -i:5007 -i:5008 -t)`.
+To release the ports occupied by directories when you got an error message saying ports are being used: `sudo kill -9 $(lsof -i:5001 -i:5002 -i:5003 -i:5004 -i:5005 -i:5006 -i:5007 -i:5008 -t)`.
 
 
-## Authentication
+## Access Control
+So far, we have been able to set up a set of directories (as web applications). Now, let's review and configure the demos of access control features supported by DBAC. 
 
-We utilize OpenID library to implement a federated identtiy assertion model among directories. In general, one directory can rely on its counterparts to authenticate a user after some configurations. From a user's perspective, one can sign in a directory with the identity from another directory. 
+### Federated identity management 
 
-### Example 
+We utilize OpenID library to implement a federated identtiy assertion model among directories. In a nutshell, one directory can rely on its counterparts to authenticate a user after some configurations. From a user's perspective, one can sign in a directory with the identity from another directory. 
+
+#### Example 
 To illustrate how to configure it, we give an example that level3aa provides a means of login with identity of level2b. In this example, level2b is the OIDC provider, while level3aa is the OIDC client.
 
 > In level2b (http://localhost:5003/auth/oauth_list), register a new client. The only nonintuitive field is "Redirect URI", which is the address that the provider should redirect back to the client. In the example, it should be `http://localhost:5004/auth/oidc_auth_code/level2b`.
@@ -107,4 +108,4 @@ To test the following features, please refer to the ABAC/Spring2021/README.md fi
 4) MQTT Notification system.
 
 ## Acknowledgement
-We would like to thank Yifan, Vibhas, Andrea for their valuable inputs and contributions on the implementation of this prototype. 
+We would like to thank Yifan and Andrea for their valuable inputs and contributions on the implementation of this prototype. 
