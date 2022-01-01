@@ -3,9 +3,9 @@
 DBAC stands for Directory-Based Access Control. It combines distributed IoT directories and attribute-based access control. This project prototypes DBAC. 
 
 Please cite the following paper if the project contributes to your work.
-```
-Luoyao Hao, Vibhas Naik, and Henning Schulzrinne, "DBAC: Directory-Based Access Control for Geographically Distributed IoT Systems", IEEE International Conference on Computer Communications (INFOCOM), 2022.
-```
+
+> Luoyao Hao, Vibhas Naik, and Henning Schulzrinne, "DBAC: Directory-Based Access Control for Geographically Distributed IoT Systems", IEEE International Conference on Computer Communications (INFOCOM), 2022.
+
 
 ## To Bootstrap the Project
 
