@@ -7,7 +7,7 @@ Please cite the following paper if the project contributes to your work.
 Luoyao Hao, Vibhas Naik, and Henning Schulzrinne, "DBAC: Directory-Based Access Control for Geographically Distributed IoT Systems", IEEE International Conference on Computer Communications (INFOCOM), 2022.
 ```
 
-## To bootstrap the project
+## To Bootstrap the Project
 
 1. Clone the project from this repository `git clone https://github.com/Halleloya/DABAC.git`.
 2. Create a virtual environment (taking virtualenv as an example) `python3 -m venv env`, `source env/bin/activate`.
@@ -27,7 +27,7 @@ To disable InsecureTransportError of OAuth2 (as https is required, but run with 
 
 The directory application used to be named as "Droit (Directories for IoT)". Therefore, the term "Droit" may appear in the source codes to refer to a single directory.  
 
-## Structure of directories 
+## Structure of Directories 
 
 Below we show a sample walk-through with a binary tree-like structure. By default (only for demo), directories are geographically distributed and connected with each other as this topology. The name convention uses letter 'a' or 'b' to denote the left and right children in a tree. For example, level4aab is connected to its parent directory level3aa and its children directories level5aaba and level5aabb.
 
@@ -50,7 +50,7 @@ To release the ports occupied by directories when you got an error message sayin
 ## Access Control
 So far, we have been able to set up a set of directories (as web applications). Now, let's review and configure the demos of access control features supported by DBAC. 
 
-### Federated identity management 
+### Federated Identity Management 
 
 We utilize OpenID library to implement a federated identtiy assertion model among directories. In a nutshell, one directory can rely on its counterparts to authenticate a user after some configurations. From a user's perspective, one can sign in a directory with the identity from another directory. 
 
@@ -78,34 +78,37 @@ To illustrate how to configure it, we give an example that level3aa provides a m
     }
 ```
 
-> Now you can login level3aa with your username and password in level2b.
+> Now you can login level3aa with your username and password registered in level2b.
 
 
+## Access Control Functionalities
+The attribute-based policies generally specify in what conditions a thing can be accessed. Access rules are specified as policies, and requests are automatically generated when users request through the provided interfaces. Details about policy formats are based on the py_abac library. By default, requests are denied if there are no policies associated. When there is a conflict, the policy with highest priority dominates. 
 
 
-## Attribute Based Access Control (ABAC)
-The ABAC system can be used to specify in what conditions a thing can be accessed. Access rules are specified as policies, and requests are automatically generated when users request through the provided interfaces. Details about policy formats can be found from the py_abac library. By default, requests are denied if there are no policies associated. When there is a conflict, the policy with highest priority dominates. 
+### Distributed Attribute Retrieval 
+The key vision behind the system is to retrieve attribute information from various resource providers. The authorization process is triggered by the "Authorize" button under "Attributes". The system identities and classifies the attributes required by the associated policies in the IoT directory. The user will be redirected to the user consent page, where they can choose from the set of possibly needed attributes what they allow the ABAC system to retrieve. The authorization and data retrieval process can be done iteratively until the system obtain enough attributes for the access decision.
+
+Currently, the system assumes the sources of attributes: subject (user) attributes either stored in the identity server of the directory or from an OIDC provider (i.e., the identity server of a different directory), object attributes in TDs, and environmental attributes from third-party servers. Sample ABAC policies are in `/sample_data/attribute_policies` as json files.
+
+### Third-party Attribute Provider
+"third-party" simulates any external resource provider, which conveys a vision that some attributes are managed and provided by other servers. For demo use, it contains any hypothetical information through third-parties (e.g., weather information including temperature and rainfall), and the underline technology is based on OAuth2. The configuration for the OAuth client is stored in "Droit/auth/providers_config.py". Run the sample server by `python app.py` in the "third-party" folder. To test the policy which requires attributes from third parties, you should ensure that the current user (e.g., "test_user") has such attributes in the database (manually insert some to the database before access).  
+
+The sample server runs on port 5100, and for example, we need to manually input the values (username, weather, rainfall) to the third-party database for testing purpose. In addition, we need some sort of manually inputs:
+``` 
+redirect uri: `http://localhost:5004/auth/info_authorize`. 
+allowed scope: `weather`. 
+allowed grant type: `authorization_code`. 
+allowed response type: `code`. 
+```
+After generating the client, put the client info to the "Droit/auth/providers_config.py". Indeed, this configuration is extremely similar to the federated identity management configuration (because OIDC is built upon OAuth). 
 
 
-## Attribute Authorization System
-The attribute authorization system can be used to retrieve attribute information from various resource providers. The authorization process is triggered by the "Authorize" button under "Attributes". The system identities and classifies the attributes required by the associated policies in the IoT directory. The user will be redirected to the user consent page, where they can choose the attribute what they allow the ABAC system to access. The authorization and data retrieval process can be done iteratively.
+### Additional Supported Features
+To test the following features, please refer to the `/sample_data/README.md` file.
 
-Currently, the system supports three basic types of attributes and assumes their sources: subject (user) attributes (from OIDC provider), object attributes (from TDs), and environmental attributes (from a third-party server). Sample ABAC policies are in `/ABAC` folder (json files).
-
-### Third-party
-"third-party" is a sample resource provider, which conveys a vision that some attributes are provided by other servers. For demo use, it contains any information through third-parties (e.g., weather information including temperature and rainfall). The configuration for the OAuth client is stored in "Droit/auth/providers_config.py". Run the sample server by `python app.py` in the "third-party" directory. To test the policy which require attributes from third parties, you should ensure that the current user (e.g., "test_user") has such attributes in the database (manually insert before access).  The sample server runs on port 5100, and you will need to manually input the values (username, weather, rainfall) to the third-party database. 
-
-To test the third-party logic, we need some sort of manually inputs. 
-redirect uri: `http://localhost:5004/auth/info_authorize`. allowed scope: `weather`. allowed grant type: `authorization_code`. allowed response type: `code`. After generating the client, put the client info to the "Droit/auth/providers_config.py".
-
-
-## Go deeper in ABAC
-To test the following features, please refer to the ABAC/Spring2021/README.md file.
-
-1) Geolocation based authorization.
-2) Dynamic attributes based authorization.
-3) Aggregate query.
-4) MQTT Notification system.
+1) Authorization based on geographic polygon: if someone's geo-coordinates is inside a geo-polygon, then access. 
+2) Authorization based on dynamic attributes: we only implement access frequency (e.g., allow no more than 3 times per minutes) as one of the dynamic attributes at the current stage. 
+3) Aggregate query across multiple directories. 
 
 ## Acknowledgement
-We would like to thank Yifan and Andrea for their valuable inputs and contributions on the implementation of this prototype. 
+We would like to thank Yifan, Hongfei, Ryan, and Andrea for their valuable inputs and contributions on the implementation of this prototype. 
