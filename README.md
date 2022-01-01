@@ -104,7 +104,7 @@ After generating the client, put the client info to the "Droit/auth/providers_co
 
 
 ### Additional Supported Features
-To test the following features, please refer to the `/sample_data/README.md` file.
+To test the following features, please refer to the [`/sample_data/README.md`](https://github.com/Halleloya/DBAC/blob/master/sample_data/README.md).
 
 1) Authorization based on geographic polygon: if someone's geo-coordinates is inside a geo-polygon, then access. 
 2) Authorization based on dynamic attributes: we only implement access frequency (e.g., allow no more than 3 times per minutes) as one of the dynamic attributes at the current stage. 
