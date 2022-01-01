@@ -52,7 +52,7 @@ So far, we have been able to set up a set of directories (as web applications). 
 
 ### Federated Identity Management 
 
-We utilize OpenID library to implement a federated identtiy assertion model among directories. In a nutshell, one directory can rely on its counterparts to authenticate a user after some configurations. From a user's perspective, one can sign in a directory with the identity from another directory. 
+We use [Authlib](https://authlib.org/) to implement a federated identtiy assertion model among directories based on OpenID. In a nutshell, one directory can rely on its counterparts to authenticate a user after some configurations. From a user's perspective, one can sign in a directory with the identity from another directory. 
 
 #### Example 
 To illustrate how to configure it, we give an example that level3aa provides a means of login with identity of level2b. In this example, level2b is the OIDC provider, while level3aa is the OIDC client.
@@ -100,7 +100,7 @@ allowed scope: `weather`.
 allowed grant type: `authorization_code`. 
 allowed response type: `code`. 
 ```
-After generating the client, put the client info to the "Droit/auth/providers_config.py". Indeed, this configuration is extremely similar to the federated identity management configuration (because OIDC is built upon OAuth). 
+After generating the client, put the client info to the "Droit/auth/providers_config.py". Indeed, this configuration is extremely similar to the federated identity management configuration (because OIDC is built upon OAuth). More on OAuth and OIDC implementation please refer to [Authlib](https://authlib.org/). 
 
 
 ### Additional Supported Features
