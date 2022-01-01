@@ -1,0 +1,69 @@
+{
+	"description": "Allow access if user's location is inside the polygon.",
+	"effect": "allow",
+	"rules": {
+		"subject": [
+			{
+				"email": {
+					"condition": "RegexMatch",
+					"value": ".*"
+				}
+			}
+		],
+		"resource": {
+			"id": {
+				"condition": "RegexMatch",
+				"value": ".*"
+			}
+		},
+		"action": [
+			{
+				"$.method": {
+					"condition": "Equals",
+					"value": "create"
+				}
+			},
+			{
+				"$.method": {
+					"condition": "Equals",
+					"value": "delete"
+				}
+			},
+			{
+				"$.method": {
+					"condition": "Equals",
+					"value": "get"
+				}
+			}
+		],
+		"context": {
+			"$.polygon": {
+				"condition": "GeoInside",
+				"values": [
+					[
+						-73.94511222839356,
+						40.84150883767766
+					],
+					[
+						-73.94129276275635,
+						40.83933355455211
+					],
+					[
+						-73.93996238708496,
+						40.84134650558101
+					],
+					[
+						-73.94373893737793,
+						40.8430022743124
+					],
+					[
+						-73.94511222839356,
+						40.84150883767766
+					]
+				]
+			}
+		}
+	},
+	"targets": {},
+	"priority": 1
+}

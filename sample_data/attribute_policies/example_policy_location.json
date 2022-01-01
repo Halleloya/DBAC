@@ -1,0 +1,32 @@
+{"description": "Allow access for a particular location.",
+    "effect": "allow",
+    "rules": {
+        "subject": [{"email": {"condition": "RegexMatch", "value": ".*"}}],
+        "resource": {"id": {"condition": "RegexMatch", "value": ".*"}},
+        "action": [{"$.method": {"condition": "Equals", "value": "create"}},
+                   {"$.method": {"condition": "Equals", "value": "delete"}},
+                   {"$.method": {"condition": "Equals", "value": "get"}}],
+		"context": {"$.polygon": {"condition": "GeoInside", "values": [[
+					  77.36572265625,
+					  13.239945499286312
+					],
+					[
+					  77.0361328125,
+					  13.025965926333539
+					],
+					[
+					  78.0029296875,
+					  12.661777510388525
+					],
+					[
+					  77.783203125,
+					  13.592599757147152
+					],
+					[
+					  77.36572265625,
+					  13.239945499286312
+					]]}}
+    },
+    "targets": {},
+    "priority": 1
+}
