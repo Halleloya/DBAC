@@ -32,7 +32,7 @@ The directory application used to be named as "Droit (Directories for IoT)". The
 Below we show a sample walk-through with a binary tree-like structure. By default (only for demo), directories are geographically distributed and connected with each other as this topology. The name convention uses letter 'a' or 'b' to denote the left and right children in a tree. For example, level4aab is connected to its parent directory level3aa and its children directories level5aaba and level5aabb.
 
 ```
-level1 (master)
+level1 (root)
 level2a level2b
 level3aa level3ab level3ba level3bb
 level4aaa level4aab level4aba level4abb level4baa level4bab level4bba level4bbb  
