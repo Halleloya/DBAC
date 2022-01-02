@@ -9,7 +9,7 @@ Please cite the following paper if the project contributes to your work.
 
 ## To Bootstrap the Project
 
-1. Clone the project from this repository `git clone https://github.com/Halleloya/DABAC.git`.
+1. Clone the project from this repository `git clone https://github.com/Halleloya/DBAC.git`.
 2. Create a virtual environment (taking virtualenv as an example) `python3 -m venv env`, `source env/bin/activate`.
 3. Install dependencies `pip3 install -r requirements.txt`. (Note: in the following we assume that you are using python3 and pip3.)
 4. Configure the database, e.g., store your database in data/db (create a folder for it if it doesn't exist), and `mongod --dbpath data/db`. 
