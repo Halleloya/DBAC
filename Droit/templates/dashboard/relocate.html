@@ -7,11 +7,33 @@
     <div>
         <div class="form-group">
             {{ form.from_location.label }}
-            {{ form.from_location(class = 'form-control', id='from_location', value=config['HOST_NAME']) }}
+            {{ form.from_location(list='levelchoose', class = 'form-control', id='from_location') }}
+            <datalist id='levelchoose'>
+                <option value='level1'>
+                <option value='level2a'>
+                <option value='level2b'>
+                <option value='level3aa'>
+                <option value='level3ab'>
+                <option value='level4aba'>
+                <option value='level4abb'>
+                <option value='level5abba'>
+                <option value='level5abbb'>
+            </datalist>
         </div>
         <div class="form-group">
             {{ form.to_location.label }}
-            {{ form.to_location(class = 'form-control', id='to_location') }}
+            {{ form.to_location(list='levelchoose', class = 'form-control', id='to_location') }}
+            <datalist id='levelchoose'>
+                <option value='level1'>
+                <option value='level2a'>
+                <option value='level2b'>
+                <option value='level3aa'>
+                <option value='level3ab'>
+                <option value='level4aba'>
+                <option value='level4abb'>
+                <option value='level5abba'>
+                <option value='level5abbb'>
+            </datalist>
         </div>
         <div class="form-group">
             {{ form.thing_id.label }}

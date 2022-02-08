@@ -1,30 +1,114 @@
-{% extends "dashboard/dashboard.html" %}
-
-{% block dashboard_content %}
+{% extends "dashboard/dashboard.html" %} {% block dashboard_content %}
 <h2 class="mb-5">Directories</h2>
+<p style="padding-bottom: 20px">
+  Here you can see all the relationships between the current level and the other
+  levels in the system.
+  <br />
+  The concept of level is like a directory here. By default (only for demo), directories 
+  are geographically distributed and connected with each other as a binary tree-like structure.
+  You can also think of different levels as different websites. Sometimes you can visit a website
+  using your gmail account. Gmail is like one level here, and the website is a different level. 
+</p>
+
+<figure>
+  <p>Your current level is <span style='font-weight: bold'>{{ config['HOST_NAME'] }}</span> </p>
+  <ul class="driottree">
+    {% if config['HOST_NAME'] == 'level1'%}
+
+    <li><code ><a href='http://localhost:5001/dashboard/directories' style='color: red' >LEVEL 1(CURRENT LEVEL)</a></code>
+      {% else %}
+      <li><code onclick="alert('You will be logged out.')"><a href='http://localhost:5001/dashboard/directories'>level1</a></code>
+        {% endif %}
+
+
+      <ul>
+        {% if config['HOST_NAME'] == 'level2a'%}
+
+        <li><code><a href='http://localhost:5002/dashboard/directories' style='color: red'>LEVEL 2A(CURRENT LEVEL)</a></code>
+          {% else %}
+          <li><code onclick="alert('You will be logged out.')"><a href='http://localhost:5002/dashboard/directories'>level2a</a></code>
+            {% endif %}
+          <ul>
+            {% if config['HOST_NAME'] == 'level3aa'%}
+
+        <li><code><a href='http://localhost:5004/dashboard/directories' style='color: red'>LEVEL 3AA(CURRENT LEVEL)</a></code>
+          {% else %}
+          <li><code onclick="alert('You will be logged out.')"><a href='http://localhost:5004/dashboard/directories'>level3aa</a></code>
+            {% endif %}
+            {% if config['HOST_NAME'] == 'level3ab'%}
+
+        <li><code><a href='http://localhost:5005/dashboard/directories' style='color: red'>LEVEL 3AB(CURRENT LEVEL)</a></code>
+          {% else %}
+          <li><code onclick="alert('You will be logged out.')"><a href='http://localhost:5005/dashboard/directories'>level3ab</a></code>
+            {% endif %}
+              <ul>
+                {% if config['HOST_NAME'] == 'level4aba'%}
+
+        <li><code><a href='http://localhost:5006/dashboard/directories' style='color: red'>LEVEL 4ABA(CURRENT LEVEL)</a></code>
+          {% else %}
+          <li><code onclick="alert('You will be logged out.')"><a href='http://localhost:5006/dashboard/directories'>level4aba</a></code>
+            {% endif %}
+            {% if config['HOST_NAME'] == 'level4abb'%}
+
+            <li><code><a href='http://localhost:5007/dashboard/directories' style='color: red'> LEVEL 4ABB(CURRENT LEVEL)</a></code>
+              {% else %}
+              <li><code onclick="alert('You will be logged out.')"><a href='http://localhost:5007/dashboard/directories'>level4abb</a></code>
+                {% endif %}
+                  <ul>
+                    {% if config['HOST_NAME'] == 'level5abba'%}
+
+        <li><code><a href='http://localhost:5008/dashboard/directories' style='color: red'>LEVEL 5ABBA(CURRENT LEVEL)</a></code>
+          {% else %}
+          <li><code onclick="alert('You will be logged out.')"><a href='http://localhost:5008/dashboard/directories'>level5abba</a></code>
+            {% endif %}
+            {% if config['HOST_NAME'] == 'level5abbb'%}
+
+            <li><code><a href='http://localhost:5009/dashboard/directories' style='color: red'>LEVEL 5ABBB(CURRENT LEVEL)</a></code>
+              {% else %}
+              <li><code onclick="alert('You will be logged out.')"><a href='http://localhost:5009/dashboard/directories'>level5abbb</a></code>
+                {% endif %}
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        {% if config['HOST_NAME'] == 'level2b'%}
+
+        <li><code><a href='http://localhost:5003/dashboard/directories'style='color: red'>LEVEL 2B(CURRENT LEVEL)</a></code>
+          {% else %}
+          <li><code><a href='http://localhost:5003/dashboard/directories'>level2b</a></code>
+            {% endif %}
+      </ul>
+    </li>
+
+
+  </ul>
+</figure>
+<!-- 
 <table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Relationship</th>
-            <th scope="col">Link</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for directory in directories %}
-        <tr>
-            <td>{{ directory.directory_name }}</td>
-            <td>{{ directory.relationship }}</td>
-            <td>
-                <a class="btn btn-primary" href="{{  directory.url }}{{url_for('dashboard.home')}}">Go</a>
-
-            </td>
-            <td>
-
-            </td>
-        </tr>
-        {% endfor %}
-
-    </tbody>
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Relationship</th>
+      <th scope="col">Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for directory in directories %}
+    <tr>
+      <td>{{ directory.directory_name }}</td>
+      <td>{{ directory.relationship }}</td>
+      <td>
+        <a
+          class="btn btn-primary"
+          href="{{  directory.url }}{{url_for('dashboard.home')}}"
+          >Go</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
+-->
 {% endblock dashboard_content%}

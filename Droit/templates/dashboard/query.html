@@ -13,7 +13,18 @@
     <div class="form-row align-items-center">
         <div class="col-sm-3">
             <!-- {{ form.location.label }} -->
-            {{ form.location(class = 'form-control', id='location', value = config['HOST_NAME'], placeholder = 'Location') }}
+            {{ form.location(list='levelchoose', class = 'form-control', id='location', placeholder = 'Location') }}
+            <datalist id='levelchoose'>
+                <option value='level1'>
+                <option value='level2a'>
+                <option value='level2b'>
+                <option value='level3aa'>
+                <option value='level3ab'>
+                <option value='level4aba'>
+                <option value='level4abb'>
+                <option value='level5abba'>
+                <option value='level5abbb'>
+            </datalist>
         </div>
         <div class="col-sm-3">
             <!-- {{ form.thing_id.label }} -->

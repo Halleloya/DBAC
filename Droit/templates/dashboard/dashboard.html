@@ -1,78 +1,89 @@
-{% extends "layout.html" %}
-
-{% block link %}
-
-{% endblock link %}
-
-{% block body %}
+{% extends "layout.html" %} {% block link %} {% endblock link %} {% block body
+%}
 <div class="container-sm dashboard">
   <div class="row sidebar-row">
     <div class="col-md-3 menus list-group">
-      <a class="list-group-item list-group-item-action {{ 'active' if tagname == 'home' else '' }}"
-        href="{{ url_for('dashboard.home')}}">
+      <a
+        class="list-group-item list-group-item-action {{ 'active' if tagname == 'home' else '' }}"
+        href="{{ url_for('dashboard.home')}}"
+      >
         Directories
       </a>
-      <a class="list-group-item list-group-item-action {{ 'active' if tagname == 'register' else '' }}"
-        href="{{ url_for('dashboard.register') }}">
-        Register
+      <a
+        class="list-group-item list-group-item-action {{ 'active' if tagname == 'register' else '' }}"
+        href="{{ url_for('dashboard.register') }}"
+      >
+        Register a Thing
       </a>
-      <a class="list-group-item list-group-item-action {{ 'active' if tagname == 'policy' else '' }}"
-        href="{{ url_for('dashboard.policy') }}">
-        Policy
+      <a
+        class="list-group-item list-group-item-action {{ 'active' if tagname == 'policy' else '' }}"
+        href="{{ url_for('dashboard.policy') }}"
+      >
+        Register a Policy
       </a>
-      <a class="list-group-item list-group-item-action {{ 'active' if tagname == 'query' else '' }}"
-        href="{{ url_for('dashboard.query')}}">
-        Query
+      <a
+        class="list-group-item list-group-item-action {{ 'active' if tagname == 'query' else '' }}"
+        href="{{ url_for('dashboard.query')}}"
+      >
+        Query a Thing
       </a>
-      <a class="list-group-item list-group-item-action {{ 'active' if tagname == 'script' else '' }}"
-        href="{{ url_for('dashboard.script')}}">
-        Custom Script Query
+      <a
+        class="list-group-item list-group-item-action {{ 'active' if tagname == 'script' else '' }}"
+        href="{{ url_for('dashboard.script')}}"
+      >
+      Query by Custom Script 
       </a>
-      <a class="list-group-item list-group-item-action {{ 'active' if tagname == 'delete' else '' }}"
-        href="{{ url_for('dashboard.delete')}}">
-        Delete
+      <a
+        class="list-group-item list-group-item-action {{ 'active' if tagname == 'delete' else '' }}"
+        href="{{ url_for('dashboard.delete')}}"
+      >
+        Delete a Thing
       </a>
-      <a class="list-group-item list-group-item-action {{ 'active' if tagname == 'relocate' else '' }}"
-        href="{{ url_for('dashboard.relocate')}}">
-        Relocate
+      <a
+        class="list-group-item list-group-item-action {{ 'active' if tagname == 'relocate' else '' }}"
+        href="{{ url_for('dashboard.relocate')}}"
+      >
+        Relocate a Thing
       </a>
-      <hr>
-    </div>
-    
-    <div class="col-md-9 main">
-      {% block dashboard_content%}
-      {% endblock %}
+      <hr />
     </div>
 
+    <div class="col-md-9 main">{% block dashboard_content%} {% endblock %}</div>
   </div>
 </div>
 
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div
+  class="modal fade"
+  id="modal"
+  tabindex="-1"
+  role="dialog"
+  aria-hidden="true"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-
-        </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-
-      </div>
+      <div class="modal-body"></div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
         <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
   </div>
 </div>
 
-{% endblock body %}
-
-{% block script %}
-{{ super() }}
+{% endblock body %} {% block script %} {{ super() }}
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 <script src="{{url_for('static', filename='js/jquery.json-editor.min.js')}}"></script>
 {% endblock script%}
