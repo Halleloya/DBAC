@@ -1,11 +1,9 @@
-{% extends "dashboard/dashboard.html" %}
-
-{% block link %}
-{{ super() }}
-<link rel="stylesheet" href="{{url_for('static', filename='css/register.css')}}">
-{% endblock link %}
-
-{% block dashboard_content %}
+{% extends "dashboard/dashboard.html" %} {% block link %} {{ super() }}
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/register.css')}}"
+/>
+{% endblock link %} {% block dashboard_content %}
 <h2 class="mb-5">Register New Thing</h2>
 
 <form class="register-form" method="POST" action="{{url_for('api.register')}}">
@@ -15,27 +13,46 @@
   </div>
   <div class="form-group">
     <div class="custom-file">
-      <input type="file" class="custom-file-input td-json" id="customFile">
-      <label class="custom-file-label td-json" for="customFile">Choose file</label>
+      <input type="file" class="custom-file-input td-json" id="customFile" />
+      <label class="custom-file-label td-json" for="customFile"
+        >Choose file</label
+      >
     </div>
   </div>
   <div class="form-group">
     <label for="targetLoc">Target Directory</label>
-    <input type="text" name="targetLoc" id="targetLoc" class="form-control" value={{config['HOST_NAME']}}>
+    <select type="text" name="targetLoc" id="targetLoc" class="form-control"
+    value={{config['HOST_NAME']}}>>
+      <option value="level1">Level1</option>
+      <option value="level2a">Level2a</option>
+      <option value="level2b">Level2b</option>
+      <option value="level3aa">Level3aa</option>
+      <option value="level3ab">Level3ab</option>
+      <option value="level4aba">Level4aba</option>
+      <option value="level4abb">Level4abb</option>
+      <option value="level5abba">Level5abba</option>
+      <option value="level5abbb">Level5abbb</option>
+    </select>
   </div>
   <div class="form-group">
     <label for="publicity">Publicity</label>
-    <input type="number" name="publicity" id="publicity" class="form-control" min="0" value="0">
+    <input
+      type="number"
+      name="publicity"
+      id="publicity"
+      class="form-control"
+      min="0"
+      value="0"
+    />
   </div>
 
   <div class="form-group">
-    <button id="submit" type="button" class="btn btn-primary mt-3">Register</button>
+    <button id="submit" type="button" class="btn btn-primary mt-3">
+      Register
+    </button>
   </div>
 </form>
 
-{% endblock dashboard_content %}
-
-{% block script %}
-{{ super() }}
+{% endblock dashboard_content %} {% block script %} {{ super() }}
 <script src="{{url_for('static', filename='js/registerjson.js')}}"></script>
 {% endblock script%}
