@@ -3,7 +3,6 @@ The classses defined in this file is comprehensively used in OpenID Connect work
 While the User class is also served as the ORM class in the local user management, all other
 classes (except the UserAccountTypeEnum) is required by the Authlib library to represent some object.
 """
-from email.policy import default
 import enum
 import json
 from flask_sqlalchemy import SQLAlchemy
@@ -111,7 +110,6 @@ class User(auth_db.Model, UserMixin):
     phone_number = auth_db.Column(auth_db.String(32), nullable=True)
     # if the user is loggedin using oidc, the password is random assigned
     password = auth_db.Column(auth_db.Text, nullable=False)
-    is_admin = auth_db.Column(auth_db.Boolean, default=False)
     account_type = auth_db.Column(auth_db.Enum(UserAccountTypeEnum))
     provider_name = auth_db.Column(auth_db.String(80))
     policy = auth_db.relationship('Policy', backref='user', lazy=True)

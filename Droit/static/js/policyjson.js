@@ -59,8 +59,3 @@ $("#submit").click(function (e) {
         }
     });
 });
-
-function myFunction() {
-  document.getElementById("cc");
-  show_prompt("A can view B", (title = "Registered Policies"));
-}

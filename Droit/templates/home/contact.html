@@ -1,41 +1,26 @@
-{% extends "layout.html" %} {% block link %}
-<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}" />
-{% endblock link %} {% block body %}
+{% extends "layout.html" %}
+{% block link %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+{% endblock link %}
+
+{% block body %}
 <div class="container">
-  <div>
-    <ul class="list-group list-group-horizontal">
-      <li class="list-group-item">
-        <img
-          src="{{ url_for('static', filename='images/linkedin.png')}}"
-          alt="Github Logo"
-          height="20"
-          width="20"
-          class="float-left icon"
-        />
-        <a
-          href="https://www.linkedin.com/in/luoyao-hao-b25302160/"
-          target="_blank"
-          >Luoyao Hao's Linkedin</a
-        >
-      </li>
-      <li class="list-group-item">
-        <img
-          src="{{ url_for('static', filename='images/github.png')}}"
-          alt="Github Logo"
-          height="25"
-          width="25"
-          class="float-left icon"
-        />
-        <a href="https://github.com/Halleloya/Droit_v2" target="_blank"
-          >Project's Github Repo</a
-        >
-      </li>
-    </ul>
+  <div class="title">
+  
+    <h1>Directory for IoT (Droit) Project
+    </h1>
+    <small>
+      Contact: <a href="https://www.linkedin.com/in/luoyao-hao-b25302160/" target="_blank">Luoyao Hao's Linkedin</a>
+    </small>
   </div>
 
+  
   <div class="contact clearfix">
     <!--<img src="{{url_for('static', filename='images/LuoyaoHao.jpeg')}}" alt="">-->
+    
   </div>
+  
+    
 </div>
 
 {% endblock %}

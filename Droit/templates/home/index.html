@@ -1,54 +1,29 @@
-{% extends "layout.html" %} {% block link %}
-<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}" />
-{% endblock link %} {% block body %}
+{% extends "layout.html" %}
+{% block link %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+{% endblock link %}
+
+{% block body %}
 <div class="container">
-  <div>
-    <h1 align="center">Directory-Based Access Control Project (DBAC)</h1>
-    <h6 align="center">
-      DBAC stands for Directory-Based Access Control. It combines distributed
-      IoT directories and attribute-based access control.
-    </h6>
-    <img src='../../static/images/DBAC.jpg' alt='DBAC' width='500' class='centerimg'>
-    <div class="introouter">
-      <div class="introleft">
-        <p><b>Our Goal</b></p>
-        <p>
-          We propose and implement Directory-Based Access Control (DBAC), a
-          flexible and systematic access control approach for geographically
-          distributed multi-administration IoT systems. DBAC designs and relies
-          on a particular module, IoT directory, to store device metadata,
-          manage federated identities, and assist with cross-domain
-          authorization. </p>
-        <br/>
-          <p>The directory service decouples IoT access into two
-          phases: 
-          <li>discover device information from directories</li>
-          <li>operate
-            devices through discovered interfaces</li> </p>
-            <br/>
-          <p>DBAC extends attribute-based
-          authorization and retrieves diverse attributes of users, devices, and
-          environments from multi-faceted sources via standard methods, while
-          user privacy is protected. To support resource-constrained devices,
-          DBAC assigns a capability token to each authorized user, and devices
-          only validate tokens to process a request.</p>
-        </p>
-      </div>
-      <div class="introright">
-        <p><b>What this website can do:</b></p>
-        
-          <li><a href="/auth/oauth_list">Federated Identity Management</a></li>
-          <li><a href="/dashboard/register">Attribute Based Access Control</a></li>
-          <li><a href="/dashboard/register">Attribute Authorization System</a></li>
-          <li>
-            For more, please refer to
-            <a
-              href="https://github.com/Halleloya/DBAC/blob/master/sample_data/README.md"
-              target="_blank" rel="noopener noreferrer">this file.</a
-            >
-          </li>
-     
-      </div>
+  <div class="title">
+    <h1>Directory for IoT (Droit) Project</h1>
+    
+  </div>
+
+  
+  <div class="contact">
+    <ul class="list-group list-group-horizontal">
+      <li class="list-group-item">
+        <img src="{{ url_for('static', filename='images/linkedin.png')}}" alt="Github Logo" height="20" width="20" class="float-left icon"> 
+        <a href="https://www.linkedin.com/in/luoyao-hao-b25302160/" target="_blank">Luoyao Hao's Linkedin</a>
+      </li>
+      <li class="list-group-item">
+        <img src="{{ url_for('static', filename='images/github.png')}}" alt="Github Logo" height="25" width="25" class="float-left icon"> 
+        <a href="https://github.com/Halleloya/Droit_v2" target="_blank">Project's Github Repo</a>   
+      </li>
+    </ul>
+    <div class="photo border shadow-lg">
+      <!--<img src="{{url_for('static', filename='images/LuoyaoHao.jpeg')}}" alt="">-->
     </div>
   </div>
 </div>

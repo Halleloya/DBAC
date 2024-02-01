@@ -1,157 +1,35 @@
 /* Initialization */
-body,
-html,
-div,
-p,
-ul,
-li,
-img,
-span {
-  margin: 0;
-  padding: 0;
+body, html, div, p, ul, li, img, span{
+    margin: 0;
+    padding: 0;
 }
 img {
-  display: block;
-}
-.centerimg{
-  display:block;
-  margin-left: auto;
-  margin-right: auto;
-  width:50%;
+    display: block;
 }
 
 .clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
+    content: "";
+    clear: both;
+    display: table;
+  }
 
 /* Custom */
 .navbar {
-  height: 100px;
-  box-shadow: 0 0 20px 10px #ccc;
+    height: 100px;
+    box-shadow: 0 0 20px 10px #ccc;
+
 }
 
 .body {
-  margin-top: 150px;
+    margin-top: 150px;
 }
 
 .center-container {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .center-text {
-  text-align: center;
-}
-
-.buttons {
-  display: flex;
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.btnfront {
-  outline: none;
-  display: block;
-  border: solid 1px #0081d5;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1;
-  padding: 16px 30px;
-  border-radius: 30px;
-  background: #ffffff;
-  color: #0081d5;
-  cursor: pointer;
-  transition: all 0.3s linear;
-  font-family: "Montserrat", sans-serif;
-}
-
-.btnfront:hover,
-.btnfront:focus {
-  background: #0081d5;
-  color: #ffffff;
-}
-.btnfront:active {
-  color: #0081d5;
-  background: #ffffff;
-}
-
-.driottree, .driottree ul, .driottree li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    position: relative;
-}
-
-.driottree {
-    margin: 0 0 1em;
     text-align: center;
 }
-.driottree, .driottree ul {
-    display: table;
-}
-.driottree ul {
-  width: 100%;
-}
-    .driottree li {
-        display: table-cell;
-        padding: .5em 0;
-        vertical-align: top;
-    }
-        /* _________ */
-        .driottree li:before {
-            outline: solid 1px #666;
-            content: "";
-            left: 0;
-            position: absolute;
-            right: 0;
-            top: 0;
-        }
-        .driottree li:first-child:before {left: 50%;}
-        .driottree li:last-child:before {right: 50%;}
-
-        .driottree code, .driottree span {
-            border: solid .1em #666;
-            border-radius: .2em;
-            display: inline-block;
-            margin: 0 .2em .5em;
-            padding: .2em .5em;
-            position: relative;
-        }
-        /* If the driottree represents DOM structure */
-        .driottree code {
-            font-family: monaco, Consolas, 'Lucida Console', monospace;
-        }
-
-            /* | */
-            .driottree ul:before,
-            .driottree code:before,
-            .driottree span:before {
-                outline: solid 1px #666;
-                content: "";
-                height: .5em;
-                left: 50%;
-                position: absolute;
-            }
-            .driottree ul:before {
-                top: -.5em;
-            }
-            .driottree code:before,
-            .driottree span:before {
-                top: -.55em;
-            }
-
-/* The root node doesn't connect upwards */
-.driottree > li {margin-top: 0;}
-    .driottree > li:before,
-    .driottree > li:after,
-    .driottree > li > code:before,
-    .driottree > li > span:before {
-      outline: none;
-    }
-
 

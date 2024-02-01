@@ -1,32 +1,12 @@
-.content {
-  margin-top: 20px;
-  align-items: center;
+.contact {
+    margin-top: 20px;
 }
-.content .icon {
-  margin-right: 5px;
+.contact .icon {
+    margin-right: 5px;
 }
-.content .photo {
-  float: left;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-top: 30px;
-}
-.introouter {
-  display: flex;
-  justify-content: space-around;
-}
-
-.introleft {
-  width: 500px;
-  padding: 10px 10px 10px 10px;
-  margin: 10px;
-  border: 3px solid #333;
-  border-radius: 9px;
-}
-.introright {
-  width: 500px;
-  padding: 10px 10px 10px 20px;
-  margin: 10px;
-  border: 3px solid #333;
-  border-radius: 9px;
+.contact .photo {
+    float: left;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 30px;
 }

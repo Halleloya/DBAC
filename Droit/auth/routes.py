@@ -320,41 +320,6 @@ def register():
 
     return render_template('auth/register.html', form=user_form)
 
-@auth.route('/register_admin', methods=['GET', 'POST'])
-def register_admin():
-    """Render local user register page and handle user registration
-
-    """
-    user_form = UserRegisterForm(request.form)
-    # Get request, no such user's email or password not match, return to 'register' page
-    if request.method == 'POST' and user_form.validate():
-        # check the user from database, then compare the password
-        user = User.query.filter_by(email=user_form.email.data).first()
-        if not user:
-            new_user = User(username=user_form.username.data,
-                            email=user_form.email.data,
-                            address=user_form.address.data,
-                            phone_number=user_form.phone_number.data,
-                            password=get_hashed_password(user_form.password.data),
-                            is_admin=True,
-                            account_type=UserAccountTypeEnum.local)  # local user register
-            auth_db.session.add(new_user)
-            user_id = new_user.get_user_id()
-            # add a AuthAttribute entry for the user to store the lists of attributes
-            # that can be accessed from user provider or external oauth2 server
-            auth_attr = AuthAttribute(user_id=user_id)
-            auth_db.session.add(auth_attr)
-            auth_db.session.commit()
-            # login success, record it using flask-login
-            login_user(new_user)
-            # clear_auth_attributes()
-            return redirect(url_for('home.index'))
-        else:
-            # User already exist, return to the register page and show the error
-            user_form.email.errors.append("User email already exist")
-
-    return render_template('auth/register_admin.html', form=user_form)
-
 
 @auth.route('/logout')
 @login_required
